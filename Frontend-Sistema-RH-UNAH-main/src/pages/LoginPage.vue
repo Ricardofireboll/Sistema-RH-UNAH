@@ -115,31 +115,35 @@ export default {
         return;
       } else {
         try {
-          var user = {
-            Email: email.value,
-            Password: password.value,
-          };
-          axios
-            .post("http://localhost:4000/RR-HH/login", user)
-            .then(function (response) {
-              console.log(response.data);
+          axios({
+            url: "http://localhost:4000/RR-HH/login",
+            method: "post",
+            responseType: "json",
+            data: {
+              Email: email.value,
+              Password: password.value,
+            },
+          })
+            .then((res) => {
+              console.log(res.data);
               if (
-                response.data.body.validacion ==
-                "Usuario y contraseña verificada"
+                res.data.body.validacion == "Usuario y contraseña verificada"
               ) {
-                if (response.data.body.datos.user.ID_Departamento == 1) {
+                if (res.data.body.datos.user.ID_Departamento == 1) {
                   router.push("/admin");
                 } else {
                   router.push("/user");
                 }
               } else if (
-                response.data.body.validacion ==
-                "Usuario y contraseña invalidos"
+                res.data.body.validacion == "Usuario y contraseña invalidos"
               ) {
                 $q.notify("Usuario y contraseña incorrectos");
               } else {
                 $q.notify("No se puede conectar con el servidor");
               }
+            })
+            .catch((error) => {
+              console.log(error);
             });
         } catch (error) {
           console.log(error);

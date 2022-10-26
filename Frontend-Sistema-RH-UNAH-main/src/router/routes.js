@@ -14,7 +14,8 @@ const routes = [
     path: '/user',
     component: () => import('layouts/PAALayout.vue'),
     children: [
-      { path: '', component: () => import('pages/MenuPrincipal.vue') }
+      { path: '', component: () => import('pages/MenuPrincipal.vue') },
+      { path: 'PAA', component: () => import('pages/PAA.vue') }
     ]
   },
   {
