@@ -76,7 +76,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="#">
+        <a href="/user/PAA">
           <div class="card w-100">
             <img
               src="../assets/img/paa-logo.png"
