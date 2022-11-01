@@ -160,7 +160,7 @@
   <div class="q-mx-xl q-gutter-sm">
 
     <q-btn color="primary" label="Agregar" class="float-right q-mb-xl" @click="fullWidth = true"/>
-    <q-btn color="secondary" label="Reportes" class="float-right q-mb-xl"/>
+    <q-btn color="secondary" label="Reportes" class="float-right q-mb-xl" @click="reporte = true"/>
 
   </div>
 
@@ -175,7 +175,7 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        Click/Tap on the backdrop.
+        Formulario de agregacion
       </q-card-section>
 
       <q-card-actions align="right" class="bg-white text-teal">
@@ -185,10 +185,85 @@
     </q-card>
   </q-dialog>
 
+
+  <q-dialog
+    v-model="reporte"
+    full-width
+  >
+    <q-card style="background-color: whitesmoke">
+      <q-card-section>
+        <div class="text-h6">Informe de participaciones</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+        <div class="row">
+        <div class="col-6" id="informePDF" style="width: 816px;height: 1056px;background-color:white">
+          <div>
+            <img src="../assets/img/logo-unah-blue.png" style="width: 15rem; margin-bottom: 3rem; padding-left: 1.5rem">
+            <img src="../assets/img/SDPE.png" style="width: 10rem; margin-bottom: 5.5rem;margin-left: 2rem">
+            <img src="../assets/img/Yellowbox.png" style="width: 2.5rem;height: 12rem; margin-bottom: 2.5rem;margin-left: 15.5rem;
+            padding-top: 1rem">
+            <div>
+              <p style="font-size: 14px;text-align: center;font-family:'Arial Black',serif">CONSTANCIA CONDENSADA DE PARTICIPACION PROCESO PAA</p>
+              <p style="text-align: justify; margin-left: 4rem;margin-right: 4rem">
+                La suscrita SECRETARIA EJECUTIVA DE DESARROLLO DE PERSONAL de la Universidad Nacional Autonoma
+                de Honduras; a traves del Departamento de Efectivdad del Recurso Humano, hace constar que el empleado abajo
+                detallado ha particpado activamente en los distintos procesos de aplicacion de la prueba de admision PAA por lo
+                que se reconoce su labor participativa en estos  procesos institucionales y para los fines que al mismo le interesen
+                y sean  pertinentes, se le detallan los datos de sus participaciones, comprendidas desde el año 2015 a la fecha:
+              </p>
+              <hr style="margin-right: 4rem;margin-left: 4rem;background-color: #1D1D1D;border: none;height: 2px">
+              <div class="row" style="margin-left: 4rem;margin-right: 4rem">
+                <div class="col">{{cuenta}}</div>
+                <div class="col">{{nombre}}</div>
+                <div class="col">Gerente de algo</div>
+                <div class="col">unidad de algo</div>
+              </div>
+              <hr style="margin-right: 4rem;margin-left: 4rem;background-color: #1D1D1D;border: none;height: 2px">
+
+            </div>
+          </div>
+        </div>
+        <div class="column-xs flex-column" >
+
+
+          <q-form class="" @submit="cambiarNombrePDF(nombrePDF)" align="center">
+            <img class="q-my-xl" src="../assets/img/pdf.png" style="width: 30%">
+
+            <q-input
+
+              style="width: auto"
+              class="q-mx-xl flex"
+              filled
+              v-model="nombrePDF"
+              label="Nombre del archivo*"
+              hint="Debe ingresar un nombre para guardar el archivo"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'No se agrego un nombre']"
+            />
+          </q-form>
+
+          <div align="right" class="q-mr-xl">
+            <q-btn class="q-mx-sm q-mt-md" color="primary" label="Guardar" @click="exportToPDF" />
+            <q-btn class="q-mx-sm q-mt-md" color="red" label="Cerrar" v-close-popup />
+          </div>
+
+        </div>
+        </div>
+      </q-card-section>
+
+      <q-card-actions align="right" class="bg-white text-teal">
+
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
 </template>
 
 <script>
 import { ref, computed } from 'vue'
+import html2pdf from "html2pdf.js";
+
 
 const columns = [
   {
@@ -303,6 +378,17 @@ const rows = [
 
 export default {
   setup () {
+    let nombrePDF=ref('')
+    //CONSTANTES PARA PRUEBAS ESTATICAS---------------
+    const nombrePrueba='Mark Zucaritas Cruz Rodriguez'
+    const idPrueba=40234
+    const depPrueba='ESPECIALISTA EN ASEGURAMIENTO DE LA CALIDAD'
+    const puestoPrueba='ESPECIALISTA EN SER ESPECIAL'
+    //------------------------------------------------
+    const cambiarNombrePDF = (valor) => {
+      nombrePDF.value=valor
+    }
+
     const pagination = ref({
       sortBy: 'id',
       descending: false,
@@ -312,6 +398,8 @@ export default {
     })
 
     return {
+      cambiarNombrePDF,
+      nombrePDF,
       model: ref('one'),
       slide: ref('style'),
       lorem: 'Lorem ipsum dolor, sit amet co',
@@ -321,6 +409,7 @@ export default {
       unidad:'Gestion y desarrollo',
       pagination,
       fullWidth: ref(false),
+      reporte: ref(false),
       search: ref(''),
       columns,
       rows,
@@ -331,10 +420,21 @@ export default {
           console.log('holaa')
       },
 
+      exportToPDF() {
+        html2pdf(document.getElementById("informePDF"), {
+          filename: "../Downloads/"+nombrePDF.value+".pdf",
+        });
+      },
+
+
       pagesNumber: computed(() => {
         return Math.ceil(rows.length / pagination.value.rowsPerPage)
       })
     }
+
+
+
+
   }
 }
 </script>

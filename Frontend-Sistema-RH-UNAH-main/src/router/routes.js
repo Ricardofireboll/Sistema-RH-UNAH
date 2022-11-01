@@ -26,6 +26,21 @@ const routes = [
       { path: 'registUser', component: () => import('pages/RegistroUsuario.vue') },
     ]
   },
+  {
+    path: '/user',
+    component: () => import('layouts/PAALayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/MenuPrincipal.vue') },
+      { path: 'BusquedaEmpleado', component: () => import('pages/BusquedaEmpleado.vue') }
+    ]
+  },
+
+
+
+
+
+
+
 
   // Always leave this as last one,
   // but you can also remove it
