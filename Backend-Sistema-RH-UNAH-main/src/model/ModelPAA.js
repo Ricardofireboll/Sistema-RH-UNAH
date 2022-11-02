@@ -12,15 +12,15 @@ function empleadosPAA() {
 
 function empleados() {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM EMPLEADOS`, (error, result) =>{
+        conexion.query(`SELECT * FROM empleados`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
 }
 
-function unEmpleado(TABLA,id) {
+function unEmpleado() {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM ${TABLA} WHERE ID_Empleado=${id}`, (error, result) =>{
+        conexion.query(`SELECT * FROM empleados WHERE id_empleado=1`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });

@@ -29,7 +29,7 @@
 
 
   <div class="row q-px-xl q-mx-xl">
-    <div class="col-2">
+    <div class="col-2 flex flex-center">
 
       <q-toggle
         size="lg"
@@ -40,7 +40,7 @@
         label="Busqueda extendida"
       />
     </div>
-    <div class="col">
+    <div class="col-3 flex flex-center">
 
       <q-toggle
         size="lg"
@@ -57,13 +57,13 @@
   <div class="row q-px-xl q-mx-xl">
 
 
-    <div class="q-pa-md col" style="max-width: 200px" v-if="rangeDateSearchToggle">
+    <div class="flex flex-center q-pa-md col" style="max-width: 200px" v-if="rangeDateSearchToggle">
       <p class="flex" style="color:grey;font-size: 16px">Fecha Inicial</p>
       <q-input rounded outlined dense v-model="dateIni" mask="date" :rules="['date']">
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-              <q-date v-model="dateIni">
+              <q-date v-model="dateIni" >
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="Close" color="primary" flat />
                 </div>
@@ -74,7 +74,7 @@
       </q-input>
     </div>
 
-    <div class="q-pa-md col" style="max-width: 200px" v-if="rangeDateSearchToggle">
+    <div class="flex flex-center q-pa-md col" style="max-width: 200px" v-if="rangeDateSearchToggle">
       <p class="flex" style="color:grey;font-size: 16px">Fecha Final</p>
       <q-input rounded outlined dense v-model="dateFin" mask="date" :rules="['date']">
         <template v-slot:append>
@@ -90,6 +90,12 @@
         </template>
       </q-input>
     </div>
+
+    <div class="q-pt-xl q-mt-sm col" v-if="rangeDateSearchToggle">
+
+      <q-btn rounded outline label="Filtrar" color="grey" text-color="blue" icon-right="filter_list"/>
+    </div>
+
   </div>
 
   <div class="q-px-xl q-mx-xl" v-if="extendSearchToggle">
@@ -142,6 +148,11 @@
       </div>
     </div>
 
+    <div class="q-pa-md col">
+
+        <q-btn rounded outline label="Filtrar" color="grey" text-color="blue" icon-right="filter_list"/>
+    </div>
+
 
   </div>
 
@@ -185,7 +196,11 @@
               </div>
 
 
+
             </q-card-section>
+            <div class="row justify-end q-pa-md" style="">
+              <q-btn color="primary" icon-right="person" outline label="Perfil"/>
+            </div>
           </q-card>
         </div>
 
@@ -244,7 +259,7 @@ const rows = [
     id: 32113,
     image:'https://media-exp1.licdn.com/dms/image/C4D03AQHnhdIBKP-mdg/profile-displayphoto-shrink_800_800/0/1572880321592?e=2147483647&v=beta&t=lZ7fiwi2e5si-mzlNjkWe8hfXXqIODUez-QH-P35HoA'
   },
-  
+
 ]
 
 export default {
