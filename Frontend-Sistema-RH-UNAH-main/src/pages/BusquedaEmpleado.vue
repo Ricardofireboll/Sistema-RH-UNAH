@@ -138,7 +138,7 @@
 
     <div  class="q-pa-md col" style="max-width: 200px">
       <div class="q-gutter-md">
-        <q-select rounded outlined dense v-model="genero" :options="options6" label="Genero" />
+        <q-select rounded outlined dense v-model="filter" :options="options6" label="Genero" />
       </div>
     </div>
 
@@ -170,7 +170,6 @@
     >
 
       <template v-slot:top-right>
-
         <q-input borderless dense debounce="300" v-model="filter" placeholder="Buscar entre resultados">
           <template v-slot:append>
             <q-icon name="search" />
@@ -178,21 +177,26 @@
         </q-input>
       </template>
 
-      <template v-slot:item="props">
 
-        <div class="q-pa-xs">
+
+      <template v-slot:item="props" >
+
+        <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
           <q-card>
             <q-card-section class="text-center">
-              <strong>{{ props.row.name }}</strong>
+              <strong>{{ props.row.primer_nombre+" "+props.row.segundo_nombre+" "+props.row.primer_apeliido+" "+props.row.segundo_apellido }}</strong>
             </q-card-section>
             <q-separator />
             <q-card-section class="flex">
               <q-img
-                :src="props.row.image"
+                :src="url"
                 style="height: 100px; max-width: 100px;border-radius: 100%"
               />
               <div class="q-px-md">
-                <p>ID: {{props.row.id}}</p>
+                <p>Correo: {{props.row.correo_institucional}}</p>
+                <p>ID: {{props.row.id_empleado}}</p>
+                <p>Genero: {{props.row.genero}}</p>
+
               </div>
 
 
@@ -213,6 +217,7 @@
 
 <script>
 import {ref} from 'vue'
+import axios from "axios";
 
 
 
@@ -220,19 +225,19 @@ import {ref} from 'vue'
 
 const columns = [
   {
-    name: 'desc',
+    name: 'primer_nombre',
     required: true,
     label: 'Nombre',
     align: 'left',
-    field: row => row.name,
+    field: row => row.primer_nombre+" "+row.segundo_nombre+" "+row.primer_apeliido+" "+row.segundo_apellido,
     format: val => `${val}`,
     sortable: true
   },
-  { name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
+  { name: 'id_empleado', align: 'center', label: 'ID', field: 'id_empleado', sortable: true },
   { name: 'Image', label: 'Image', field: 'image', sortable: true}
 ]
 
-const rows = [
+let rows1 = [
 
   {
     name: 'Jose Manuel Urbina Mnazuckich',
@@ -262,8 +267,34 @@ const rows = [
 
 ]
 
+const rows=ref([])
+const url=ref('https://www.shareicon.net/download/2016/07/10/119669_people_512x512.png')
 export default {
   setup(){
+
+    var Empleados = ref([]);
+
+    const empleados = async () => {
+      try {
+        await axios({
+          url: "http://localhost:4000/RR-HH/PAA/empleados",
+          method: "get",
+          responseType: "json",
+        })
+          .then((res) => {
+            Empleados.value = res.data.body;
+            console.log(Empleados.value);
+            console.log(res.data.body);
+            rows.value=Empleados.value
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    empleados();
 
     return{
       typeSearch: ref('one'),
@@ -281,8 +312,11 @@ export default {
       genero:ref(null),
       nacionalidad:ref(null),
       filter: ref(''),
+
       columns,
       rows,
+      Empleados,
+      url,
 
 
       options1: [
@@ -301,7 +335,7 @@ export default {
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
       ],
       options6: [
-        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+        'M','F'
       ],
       options7: [
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'

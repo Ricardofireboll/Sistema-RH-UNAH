@@ -55,11 +55,11 @@
           <div class="q-mx-md q-mt-lg text-left d-flex">
             <strong>Nombre</strong>
             <div class="q-my-sm text-left d-flex">
-              {{ nombre }}
+              {{ primer_n +" "+ segundo_nombre +" "+ primer_apellido +" "+ segundo_a }}
             </div>
             <strong>Cuenta</strong>
             <div class="q-my-sm text-left d-flex">
-              {{ cuenta }}
+              {{ id_empleado}}
             </div>
           </div>
 
@@ -75,14 +75,7 @@
           </div>
 
           <div class="q-mx-md q-mt-lg text-left d-flex">
-            <strong>Nombre</strong>
-            <div class="q-my-sm text-left d-flex">
-              {{ nombre }}
-            </div>
-            <strong>Cuenta</strong>
-            <div class="q-my-sm text-left d-flex">
-              {{ cuenta }}
-            </div>
+
           </div>
         </div>
 
@@ -220,8 +213,8 @@
               </p>
               <hr style="margin-right: 4rem;margin-left: 4rem;background-color: #1D1D1D;border: none;height: 2px">
               <div class="row" style="margin-left: 4rem;margin-right: 4rem">
-                <div class="col">{{cuenta}}</div>
-                <div class="col">{{nombre}}</div>
+                <div class="col">{{id_empleado}}</div>
+                <div class="col"> {{ primer_n +" "+ segundo_nombre +" "+ primer_apellido +" "+ segundo_a }}</div>
                 <div class="col">Gerente de algo</div>
                 <div class="col">unidad de algo</div>
               </div>
@@ -355,106 +348,19 @@ const rows = [
     funcion:'Aplicador',
     fecha:'15/10/15',
     horas:1
-  },
-  {
-    id: 3,
-    anio: 2016,
-    nombre:'Mark',
-    periodo: 3,
-    edificio: 'C2',
-    aula:102,
-    funcion:'Supervisor',
-    fecha:'15/10/15',
-    horas:2
-  },
-  {
-    id: 3,
-    anio: 2016,
-    nombre:'Mark',
-    periodo: 3,
-    edificio: 'C2',
-    aula:102,
-    funcion:'Supervisor',
-    fecha:'15/10/15',
-    horas:2
-  },
-  {
-    id: 3,
-    anio: 2016,
-    nombre:'Mark',
-    periodo: 3,
-    edificio: 'C2',
-    aula:102,
-    funcion:'Supervisor',
-    fecha:'15/10/15',
-    horas:2
-  },
-  {
-    id: 3,
-    anio: 2016,
-    nombre:'Mark',
-    periodo: 3,
-    edificio: 'C2',
-    aula:102,
-    funcion:'Supervisor',
-    fecha:'15/10/15',
-    horas:2
-  },
-  {
-    id: 3,
-    anio: 2016,
-    nombre:'Mark',
-    periodo: 3,
-    edificio: 'C2',
-    aula:102,
-    funcion:'Supervisor',
-    fecha:'15/10/15',
-    horas:2
-  },
-  {
-    id: 3,
-    anio: 2016,
-    nombre:'Mark',
-    periodo: 3,
-    edificio: 'C2',
-    aula:102,
-    funcion:'Supervisor',
-    fecha:'15/10/15',
-    horas:2
   }
 ]
 
 export default {
   setup () {
-    const Emplea = [
-      { id: 1, nombre: "juan" },
-      { id: 200, nombre: "hola" },
-    ];
-    var Empleados = ref([]);
+    let nombrePDF=ref('')
+    let id_empleado=ref('')
+    let primer_n=ref('')
+    let segundo_nombre=ref('')
+    let primer_apellido=ref('')
+    let segundo_a=ref('')
+    let empleado=ref([])
 
-    var empleado=ref([])
-    var Hola = true;
-    const empleados = async () => {
-      try {
-        await axios({
-          url: "http://localhost:4000/RR-HH/PAA/empleados",
-          method: "get",
-          responseType: "json",
-        })
-          .then((res) => {
-            Empleados.value = res.data.body;
-            console.log(Empleados.value);
-            console.log(res);
-
-            Hola = false;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
     const empleadoUnico = async () => {
       try {
         await axios({
@@ -464,10 +370,12 @@ export default {
         })
           .then((res) => {
             empleado.value = res.data.body;
-            console.log(empleado.value);
-            console.log(res);
-
-            Hola = false;
+            console.log(empleado.value.at(0).id_empleado);
+            id_empleado.value=empleado.value.at(0).id_empleado
+            primer_n.value=empleado.value.at(0).primer_nombre
+            segundo_nombre.value=empleado.value.at(0).segundo_nombre
+            primer_apellido.value=empleado.value.at(0).primer_apeliido
+            segundo_a.value=empleado.value.at(0).segundo_apellido
           })
           .catch((error) => {
             console.log(error);
@@ -476,23 +384,13 @@ export default {
         console.log(error);
       }
     };
-    //empleados();
+
     empleadoUnico();
 
 
 
 
 
-
-
-
-    let nombrePDF=ref('')
-    //CONSTANTES PARA PRUEBAS ESTATICAS---------------
-    const nombrePrueba='Mark Zucaritas Cruz Rodriguez'
-    const idPrueba=40234
-    const depPrueba='ESPECIALISTA EN ASEGURAMIENTO DE LA CALIDAD'
-    const puestoPrueba='ESPECIALISTA EN SER ESPECIAL'
-    //------------------------------------------------
     const cambiarNombrePDF = (valor) => {
       nombrePDF.value=valor
     }
@@ -512,9 +410,6 @@ export default {
       nombrePDF,
       model: ref('one'),
       slide: ref('style'),
-      lorem: 'Lorem ipsum dolor, sit amet co',
-      nombre:'Mark Zucaritas Diaz Rodriguez',
-      cuenta:20181032517,
       centro:'Ciudad Universitaria',
       unidad:'Gestion y desarrollo',
       pagination,
@@ -525,14 +420,29 @@ export default {
       rows,
       separator: ref('none'),
       edicion:ref(false),
-      Hola,
-      Emplea,
-      empleadoUnico,
+
       empleado,
+      id_empleado,
+      primer_n,
+      segundo_nombre,
+      primer_apellido,
+      segundo_a,
+
+
+
+
+
+
+
+
+
+
+
+
       onSubmit(){
         //Que haga lo que tenga que hacer
 
-          console.log("hola")
+
       },
 
       exportToPDF() {

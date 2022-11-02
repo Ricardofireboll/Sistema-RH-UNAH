@@ -20,7 +20,7 @@ function empleados() {
 
 function unEmpleado() {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM empleados WHERE id_empleado=1`, (error, result) =>{
+        conexion.query(`SELECT * FROM empleados WHERE id_empleado=5`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
