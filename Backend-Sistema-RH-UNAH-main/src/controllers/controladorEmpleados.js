@@ -29,7 +29,7 @@ async function insertarDescripcionPAA(body) {
 
 
 function eliminar(id) {
-    return dataBase.eliminar(TABLA, id);
+    return dataBase.eliminarEmpleado(TABLA, id);
 }
 
 module.exports ={

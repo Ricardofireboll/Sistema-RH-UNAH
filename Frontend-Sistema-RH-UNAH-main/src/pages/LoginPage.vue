@@ -71,7 +71,6 @@
           v-model="password"
           label="Password"
           class="q-mt-lg"
-          color="purple-12"
           :type="isPwd ? 'password' : 'text'"
           :rules="[(val) => (val && val.length > 0) || 'Ingresar contraseña']"
         >
@@ -108,14 +107,15 @@ export default {
     const router = useRouter();
     const email = ref("");
     const password = ref("");
+    const user = ref("");
     const isPwd = ref(true);
-    const prosesarFormulario = () => {
+    const prosesarFormulario = async () => {
       if (!email.value.trim() || !password.value.trim()) {
         console.log("campos vacios");
         return;
       } else {
         try {
-          axios({
+          await axios({
             url: "http://localhost:4000/RR-HH/login",
             method: "post",
             responseType: "json",
@@ -125,18 +125,25 @@ export default {
             },
           })
             .then((res) => {
-              console.log(res.data);
-              if (
-                res.data.body.validacion == "Usuario y contraseña verificada"
-              ) {
-                if (res.data.body.datos.user.ID_Departamento == 1) {
+              let login = res.data.body;
+              console.log(login);
+              if (login.validacion == "Usuario y contraseña verificada") {
+                // Guardar
+                sessionStorage.setItem("User", login.datos.user.ID_Usuario);
+                user.value = sessionStorage.getItem("User");
+                console.log("Id Usuario:  " + user.value);
+                // Mostrar
+                // sessionStorage.getItem("User");
+                // Modificar
+                // sessionStorage.setItem("User", login.datos.user.ID_Usuario(Modificacion));
+                //Eliminar
+                // sessionStorage.removeItem("User");
+                if (login.datos.user.ID_Departamento == 1) {
                   router.push("/admin");
                 } else {
                   router.push("/user");
                 }
-              } else if (
-                res.data.body.validacion == "Usuario y contraseña invalidos"
-              ) {
+              } else if (login.validacion == "Usuario y contraseña invalidos") {
                 $q.notify("Usuario y contraseña incorrectos");
               } else {
                 $q.notify("No se puede conectar con el servidor");
@@ -153,6 +160,7 @@ export default {
     return {
       email,
       password,
+      user,
       prosesarFormulario,
       isPwd,
     };

@@ -1,12 +1,7 @@
 <template>
   <div
     class="card-group d-flex justify-content-center"
-    style="
-      padding-top: 10rem;
-      padding-left: 5rem;
-      padding-right: 5rem;
-      background-color: rgb(255, 255, 255);
-    "
+    style="padding-top: 10rem; padding-left: 5rem; padding-right: 5rem"
   >
     <div class="row">
       <div class="col">
@@ -103,15 +98,17 @@
 
 <script></script>
 
-<style>
+<style scoped>
 .card {
   margin: 0.5rem;
   justify-content: center;
   box-sizing: border-box;
   font-family: "Microsoft JhengHei", serif;
+  background-color: white;
+  border-radius: 25px;
 }
 .card:hover {
-  box-shadow: 5px 6px 6px 2px #e9ecef;
+  box-shadow: 5px 6px 6px 2px #0000009e;
   transition: 0.5s;
   transform: scale(1.05);
 }

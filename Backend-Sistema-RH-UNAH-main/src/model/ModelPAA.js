@@ -13,6 +13,7 @@ function empleadosPAA() {
 function empleados() {
     return new Promise((resolve, reject) =>{
         conexion.query(`SELECT * FROM EMPLEADOS`, (error, result) =>{
+            result.fecha_ingreso ="0"
             return error ? reject(error) : resolve(result);
         });
     });

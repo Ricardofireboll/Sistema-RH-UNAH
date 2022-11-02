@@ -56,7 +56,7 @@ async function insertarEmplead(req, res, next){
         if (req.body.id_empleado == 0) {
             mensaje = 'Empleado guardado con exito'
         }else{
-            mensaje = 'Empleado actualizado con exito'
+            mensaje = 'Empleado actualizado con exitooooo'
         }
         respuesta.success(req, res, mensaje, 201);
     } catch (err) {

@@ -1,254 +1,276 @@
 <template>
-  <div class="container">
-    <div id="formulario-newUser">
-      <h1>Nuevo Usuario</h1>
-      <form class="needs-validation" novalidate>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-3">
-                  <label for="txt-primerNombre" class="label"
-                    >Primer Nombre</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="primerNombre"
-                    id="txt-primerNombre"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-3">
-                  <label for="txt-segundoNombre" class="label"
-                    >Segundo Nombre</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="segundoNombre"
-                    id="txt-segundoNombre"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="txt-email" class="label"
-                    >Correo Electronico</label
-                  >
-                  <input
-                    type="email"
-                    class="form-control"
-                    v-model="email"
-                    id="txt-email"
-                    required
-                  />
-                  <div class="invalid-feedback">Colocar correo valido.</div>
-                </div>
+  <q-page padding class="column items-center text-center">
+    <div id="formulario-newUser" class="shadow-10">
+      <span>Registro Usuario</span>
+      <q-form @submit.prevent="guardarUsuario">
+        <div class="row items-center text-center">
+          <!-- col 1 -->
+          <div class="col-4">
+            <div class="row">
+              <div class="col-6 q-pa-lg">
+                <q-input
+                  v-model="primerNombre"
+                  text-center
+                  label="Primer Nombre"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar primer nombre',
+                  ]"
+                />
+                <q-input
+                  class="q-mt-md"
+                  v-model="primerApellido"
+                  label="Primer Apellido"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar primer apellido',
+                  ]"
+                />
               </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <label for="txt-primerApellido" class="label"
-                    >Primer Apellido</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="primerApellido"
-                    id="txt-primerApellido"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-3">
-                  <label for="txt-segundoApellido" class="label"
-                    >Segundo Apellido</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="segundoApellido"
-                    id="txt-segundoNombre"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="txt-password" class="label">Contraseña</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="password"
-                    id="txt-password"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="txt-fechaNacimiento" class="label"
-                    >Fecha de nacimiento</label
-                  >
-                  <input
-                    type="date"
-                    class="form-control"
-                    v-model="fecha"
-                    id="txt-fechaNacimiento"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="txt-departamento" class="label"
-                    >Departamento</label
-                  >
-                  <select
-                    class="form-select"
-                    v-model="departamento"
-                    id="txt-departamento"
-                    required
-                  >
-                    <option selected disabled value="">Seleccionar</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Planilla</option>
-                    <option value="3">Monitoreo</option>
-                    <option value="4">PAA</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please select a valid state.
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="txt-telefono" class="label">Teléfono</label>
-                  <input
-                    type="tel"
-                    class="form-control"
-                    v-model="telefono"
-                    id="txt-telefono"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="txt-direccion" class="label">Dirección</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="direccion"
-                    id="txt-direccion"
-                    required
-                  />
-                  <div class="invalid-feedback">Llenar campo.</div>
-                </div>
+              <div class="col-6 q-pa-lg">
+                <q-input
+                  v-model="segundoNombre"
+                  label="Segundo Nombre"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar segundo nombre',
+                  ]"
+                />
+                <q-input
+                  class="q-mt-md"
+                  v-model="segundoApellido"
+                  label="Segundo Apellido"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar segundo apellido',
+                  ]"
+                />
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-12">
-                  <img
-                    id="imgNew"
-                    src="../assets/img/log0-unah.png"
-                    class="img-thumbnail"
-                    alt="Error"
-                  />
-                  <div class="d-flex justify-content-evenly">
-                    <input type="file" class="form-control" id="imgNew" />
-                    <div
-                      class="d-grid gap-2 d-md-flex justify-content-md-end"
-                    ></div>
-                  </div>
-                  <button
-                    class="btn btn-primary"
-                    style="margin-top: 40px"
-                    type="submit"
-                    @click="validar()"
-                  >
-                    Guardar Usuario
-                  </button>
-                </div>
+            <div class="row">
+              <div class="col-12 q-pa-md">
+                <q-input
+                  v-model="fechaNacimiento"
+                  type="date"
+                  hint="Fecha de Nacimiento"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar fecha de nacimiento',
+                  ]"
+                />
+                <q-input
+                  class="q-mt-md"
+                  v-model="telefono"
+                  type="tel"
+                  label="Telefono"
+                  mask="(###) #### - ####"
+                  unmasked-value
+                  :rules="[
+                    (val) => (val && val.length > 0) || 'Ingresar telefono',
+                  ]"
+                />
               </div>
-              <input
-                type="button"
-                class="btn btn-primary"
-                @click="NuevoUsuario()"
-                value="Agregar"
-                style="margin-top: 1rem"
-              />
+            </div>
+          </div>
+
+          <!-- col 2 -->
+
+          <div class="col-4">
+            <div class="row">
+              <div class="col-12 q-pa-lg">
+                <q-input
+                  v-model="email"
+                  type="email"
+                  label="Correo electronico"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar correo electronico',
+                  ]"
+                />
+                <q-input
+                  v-model="password"
+                  label="Password"
+                  class="q-mt-lg"
+                  color="purple-12"
+                  :type="isPwd ? 'password' : 'text'"
+                  :rules="[
+                    (val) => (val && val.length > 0) || 'Ingresar contraseña',
+                  ]"
+                >
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      @click="isPwd = !isPwd"
+                    />
+                  </template>
+                </q-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 q-pa-md">
+                <q-select
+                  v-model="departamento"
+                  hint=" "
+                  transition-show="flip-up"
+                  transition-hide="flip-down"
+                  :options="options"
+                  label="Departamento"
+                  emit-value
+                  map-options
+                  :rules="[
+                    (val) => (val && val.length > 0) || 'Seleccione una opción',
+                  ]"
+                />
+                <q-input
+                  class="q-mt-sm"
+                  v-model="direccion"
+                  label="Dirección"
+                  :rules="[
+                    (val) =>
+                      (val && val.length > 0) || 'Ingresar primer nombre',
+                  ]"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- col 3 -->
+          <div class="col-4 q-pa-lg">
+            <div class="row">
+              <div class="col-12 q-pa-lg">
+                <q-uploader v-model="img" style="max-width: 300px" />
+                <q-btn
+                  color="primary"
+                  class="q-mt-lg"
+                  type="submit"
+                  label="Guardar"
+                />
+                <q-btn
+                  color="primary"
+                  @click="holas"
+                  class="q-mt-lg q-ml-lg"
+                  label="hola"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </form>
+      </q-form>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
+import { useQuasar } from "quasar";
 import axios from "axios";
+import { ref } from "vue";
 export default {
-  name: "registroUsuario",
-  data() {
-    return {
-      primerNombre: "",
-      segundoNombre: "",
-      primerApellido: "",
-      segundoApellido: "",
-      password: "",
-      direccion: "",
-      email: "",
-      fecha: "",
-      departamento: "",
-      telefono: "",
-    };
-  },
-  methods: {
-    async NuevoUsuario() {
-      var userNew = {
+  setup() {
+    const $q = useQuasar();
+    const newUser = ref("");
+    const primerNombre = ref("");
+    const segundoNombre = ref("");
+    const primerApellido = ref("");
+    const segundoApellido = ref("");
+    const img = ref();
+    const telefono = ref("");
+    const fechaNacimiento = ref("");
+    const email = ref("");
+    const isPwd = ref(true);
+    const password = ref("");
+    const direccion = ref("");
+    const departamento = ref(null);
+    const hola = ref("");
+    const options = [
+      {
+        label: "Administrador",
+        value: "1",
+      },
+      {
+        label: "PAA",
+        value: "2",
+      },
+      {
+        label: "Monitoreo",
+        value: "3",
+      },
+      {
+        label: "Planilla",
+        value: "4",
+      },
+    ];
+
+    const guardarUsuario = async () => {
+      newUser.value = {
         ID_Usuario: "0",
-        ID_Departamento: this.departamento,
-        Nombre1: this.primerNombre,
-        Nombre2: this.segundoNombre,
-        Apellido1: this.primerApellido,
-        Apellido2: this.segundoApellido,
-        Fecha_Nacimiento: this.fecha,
-        Direccion: this.direccion,
-        Imagen: "fviszvipdgofvudpovjsdagusidfagucsiocgsaiogaco",
-        Email: this.email,
-        Password: this.password,
-        Telefono: this.telefono,
+        ID_Departamento: departamento,
+        Nombre1: primerNombre,
+        Nombre2: segundoNombre,
+        Apellido1: primerApellido,
+        Apellido2: segundoApellido,
+        Fecha_Nacimiento: fechaNacimiento,
+        Direccion: direccion,
+        Imagen: " ",
+        Email: email,
+        Password: password,
+        Telefono: telefono,
       };
-      await axios
-        .post("http://localhost:4000/RR-HH/usuarios", userNew)
-        .then(function (response) {
-          console.log(response);
-          alert("Usuario guardado");
-        });
-    },
+      console.log(newUser.value);
+      try {
+        await axios({
+          url: "http://localhost:4000/RR-HH/usuarios",
+          method: "post",
+          responseType: "json",
+          data: newUser.value,
+        })
+          .then((res) => {
+            console.log(res.data);
+            $q.notify("Usuario Guardado");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const holas = () => {
+      console.log(img.value);
+    };
+    return {
+      newUser,
+      primerNombre,
+      segundoNombre,
+      primerApellido,
+      segundoApellido,
+      img,
+      telefono,
+      fechaNacimiento,
+      email,
+      isPwd,
+      password,
+      direccion,
+      departamento,
+      options,
+      guardarUsuario,
+      hola,
+      holas,
+    };
   },
 };
 </script>
 
 <style scoped>
-#div-principal {
-  padding-top: 15px;
-  background-color: rgb(255, 255, 255);
-  width: 100vw;
-  height: 100vh;
-}
 #formulario-newUser {
-  padding: 20px 50px 50px 50px;
+  width: 1200px;
+  height: 500px;
   border-radius: 25px;
-  border-style: outset;
-  background-color: white;
+  border: solid 1px violet;
+  padding: 25px;
 }
-.label {
-  margin-top: 30px;
-  color: rgb(130, 127, 127);
-  text-decoration: solid;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: 18px;
-}
-#img-newUser {
-  width: 200px;
-  height: 200px;
+#hola {
+  width: 150px;
+  height: 50px;
+  background-color: blue;
 }
 </style>

@@ -15,7 +15,8 @@ const routes = [
     component: () => import('layouts/PAALayout.vue'),
     children: [
       { path: '', component: () => import('pages/MenuPrincipal.vue') },
-      { path: 'PAA', component: () => import('pages/PAA.vue') }
+      { path: '/PAA', component: () => import('pages/PAA.vue') },
+      { path: '/perfilUser', component: () => import('pages/PerfilUsuario.vue') }
     ]
   },
   {
@@ -23,7 +24,8 @@ const routes = [
     component: () => import('layouts/AdminLayout.vue'),
     children: [
       { path: '', component: () => import('pages/AdminHomeMenu.vue') },
-      { path: 'registUser', component: () => import('pages/RegistroUsuario.vue') },
+      { path: '/registUser', component: () => import('pages/RegistroUsuario.vue') },
+      { path: '/perfilAdmin', component: () => import('pages/PerfilUsuario.vue') }
     ]
   },
 

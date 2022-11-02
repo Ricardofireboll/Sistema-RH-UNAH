@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col">
-        <a href="admin/registUser">
+        <a href="registUser">
           <div class="card w-100">
             <img
               src="../assets/img/registro.png"
@@ -49,7 +49,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="#">
+        <a href="/">
           <div class="card w-100">
             <img
               src="../assets/img/bell.png"

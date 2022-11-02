@@ -1203,7 +1203,7 @@
   <div>
     <ul id="prueba">
       <li v-for="(Emplado, i) in Empleados" :key="i">
-        {{ i + 1 }}. {{ Emplado.primer_nombre }}
+        {{ i + 1 }}. {{ Emplado.fecha_ingreso }}
       </li>
     </ul>
 
@@ -1231,6 +1231,11 @@ export default {
           responseType: "json",
         })
           .then((res) => {
+            // var today = new Date();
+            // console.log(res.data.body[0].fecha_ingreso);
+            // var now = today.toLocaleDateString(res.data.body[0].fecha_ingreso);
+            // console.log(now);
+
             Empleados.value = res.data.body;
             console.log(Empleados.value);
             console.log(res);
