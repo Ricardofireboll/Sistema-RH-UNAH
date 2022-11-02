@@ -10,11 +10,13 @@ const routes = [
     name: 'login',
     component: () => import('pages/LoginPage.vue')
   },
+ ,
   {
     path: '/user',
     component: () => import('layouts/PAALayout.vue'),
     children: [
-      { path: '', component: () => import('pages/MenuPrincipal.vue') }
+      { path: '', component: () => import('pages/MenuPrincipal.vue') },
+      { path: 'gestorEmpleado', component: () => import('pages/GestorEmpleado.vue') }
     ]
   },
   {
