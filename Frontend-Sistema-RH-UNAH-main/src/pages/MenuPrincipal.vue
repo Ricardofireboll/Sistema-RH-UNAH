@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col">
-        <a href="#">
+        <a href="/user/BusquedaEmpleado">
           <div class="card w-100">
             <img
               src="../assets/img/gestion-empleados.png"
