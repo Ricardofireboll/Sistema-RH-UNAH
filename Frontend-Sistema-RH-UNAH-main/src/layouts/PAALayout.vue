@@ -110,6 +110,19 @@
 
             <q-item-section> Busqueda Empleados </q-item-section>
           </q-item>
+          <q-item
+            clickable
+            v-ripple
+            to="GestorEmpleado"
+            active-class="my-menu-link"
+            exact
+          >
+            <q-item-section avatar>
+              <q-icon name="email" />
+            </q-item-section>
+
+            <q-item-section> Gestor Empleado </q-item-section>
+          </q-item>
         </q-list>
       </q-scroll-area>
 
