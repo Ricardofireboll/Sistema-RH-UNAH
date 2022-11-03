@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col">
-        <a href="#">
+        <a href="/BusquedaEmpleado">
           <div class="card w-100">
             <img
               src="../assets/img/gestion-empleados.png"
@@ -71,7 +71,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="/user/PAA">
+        <a href="PAA1">
           <div class="card w-100">
             <img
               src="../assets/img/paa-logo.png"

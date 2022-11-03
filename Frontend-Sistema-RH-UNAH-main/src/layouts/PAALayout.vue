@@ -84,6 +84,32 @@
 
             <q-item-section> Perfil </q-item-section>
           </q-item>
+          <q-item
+            clickable
+            v-ripple
+            to="PAA1"
+            active-class="my-menu-link"
+            exact
+          >
+            <q-item-section avatar>
+              <q-icon name="email" />
+            </q-item-section>
+
+            <q-item-section> PAA1</q-item-section>
+          </q-item>
+          <q-item
+            clickable
+            v-ripple
+            to="BusquedaEmpleado"
+            active-class="my-menu-link"
+            exact
+          >
+            <q-item-section avatar>
+              <q-icon name="email" />
+            </q-item-section>
+
+            <q-item-section> Busqueda Empleados </q-item-section>
+          </q-item>
         </q-list>
       </q-scroll-area>
 

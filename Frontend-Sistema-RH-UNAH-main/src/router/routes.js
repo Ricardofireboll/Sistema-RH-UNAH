@@ -16,7 +16,9 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/MenuPrincipal.vue') },
       { path: '/PAA', component: () => import('pages/PAA.vue') },
-      { path: '/perfilUser', component: () => import('pages/PerfilUsuario.vue') }
+      { path: '/perfilUser', component: () => import('pages/PerfilUsuario.vue') },
+      { path: '/PAA1', component: () => import('pages/PAA1.vue') },
+      { path: '/BusquedaEmpleado', component: () => import('pages/BusquedaEmpleado.vue') },
     ]
   },
   {
