@@ -49,6 +49,7 @@
         v-model="extendSearchToggle"
         checked-icon="check"
         color="green"
+        @click="traerEmpleados"
         unchecked-icon="clear"
         label="Busqueda extendida"
       />
@@ -57,6 +58,7 @@
       <q-toggle
         size="lg"
         v-model="rangeDateSearchToggle"
+        @click="traerEmpleados"
         checked-icon="check"
         color="green"
         unchecked-icon="clear"
