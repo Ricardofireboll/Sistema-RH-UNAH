@@ -45,8 +45,11 @@ async function empleadosfecha(req, res, next){
 };
 /**********************************************************************/
 async function Consulta(req, res, next){
+    console.log(req.query.genero);
+    console.log(req.query.modalidad);
+    console.log(req.query.rol_trabajo);
     try {
-        const items = await controlador.empleadosConsulta();
+        const items = await controlador.empleadosConsulta(req.query.genero, req.query.modalidad, req.query.rol_trabajo);
         respuesta.success(req, res, items, 200);
     } catch (err) {
         next(err)

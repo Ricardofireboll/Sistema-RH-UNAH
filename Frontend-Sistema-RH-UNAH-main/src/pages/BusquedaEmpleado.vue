@@ -158,51 +158,59 @@
           rounded
           outlined
           dense
-          v-model="depto"
-          :options="options1"
-          label="Departamento"
+          transition-show="flip-up"
+          transition-hide="flip-down"
+          v-model="genero"
+          :options="options6"
+          label="Genero"
         />
       </div>
     </div>
 
-    <div class="q-pa-md col" style="max-width: 150px">
+    <!-- <div class="q-pa-md col" style="max-width: 150px">
       <div class="q-gutter-md">
         <q-select
           rounded
           outlined
           dense
+          transition-show="flip-up"
+          transition-hide="flip-down"
           v-model="unidad"
           :options="options2"
           label="Unidad"
         />
       </div>
-    </div>
+    </div> -->
 
-    <div class="q-pa-md col" style="max-width: 150px">
+    <!-- <div class="q-pa-md col" style="max-width: 150px">
       <div class="q-gutter-md">
         <q-select
           rounded
           outlined
           dense
+          transition-show="flip-up"
+          transition-hide="flip-down"
           v-model="centro"
           :options="options3"
           label="Centro"
         />
       </div>
-    </div>
+    </div> -->
 
-    <div class="q-pa-md col" style="max-width: 200px">
+    <!-- <div class="q-pa-md col" style="max-width: 200px">
       <div class="q-gutter-md">
         <q-select
           rounded
           outlined
           dense
+          transition-show="flip-up"
+          transition-hide="flip-down"
           v-model="dependencia"
           :options="options4"
           label="Dependencia"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="q-pa-md col" style="max-width: 180px">
       <div class="q-gutter-md">
@@ -210,25 +218,29 @@
           rounded
           outlined
           dense
-          v-model="profesion"
+          transition-show="flip-up"
+          transition-hide="flip-down"
+          v-model="modalidad"
           :options="options5"
-          label="Profesion"
+          label="Modalidad"
         />
       </div>
     </div>
 
-    <div class="q-pa-md col" style="max-width: 200px">
+    <!-- <div class="q-pa-md col" style="max-width: 200px">
       <div class="q-gutter-md">
         <q-select
           rounded
           outlined
           dense
+          transition-show="flip-up"
+          transition-hide="flip-down"
           v-model="filter"
           :options="options6"
           label="Genero"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="q-pa-md col" style="max-width: 200px">
       <div class="q-gutter-md">
@@ -236,9 +248,11 @@
           rounded
           outlined
           dense
-          v-model="nacionalidad"
+          transition-show="flip-up"
+          transition-hide="flip-down"
+          v-model="dias_laborales"
           :options="options7"
-          label="Nacionalidad"
+          label="Dias Laborales"
         />
       </div>
     </div>
@@ -247,6 +261,7 @@
       <q-btn
         rounded
         outline
+        @click="empleadosFiltros"
         label="Filtrar"
         color="grey"
         text-color="blue"
@@ -361,6 +376,13 @@ export default {
     const Buscar = ref("");
     const dateIni = ref("2015/02/01");
     const dateFin = ref("2022/12/01");
+    const genero = ref(null);
+    const depto = ref(null);
+    const unidad = ref(null);
+    const centro = ref(null);
+    const dependencia = ref(null);
+    const dias_laborales = ref(null);
+    const modalidad = ref(null);
 
     var Empleados = ref([]);
     var Empleado = ref([]);
@@ -431,7 +453,7 @@ export default {
     const empleadosFiltros = async () => {
       try {
         await axios({
-          url: `http://localhost:4000/RR-HH/empleados/fechas?fecha1=${dateIni.value}&fecha2=${dateFin.value}`,
+          url: `http://localhost:4000/RR-HH/Empleados/consulta?genero=${genero.value}&modalidad=${modalidad.value}&rol_trabajo=${dias_laborales.value}`,
           method: "get",
           responseType: "json",
         })
@@ -448,54 +470,43 @@ export default {
         console.log(error);
       }
     };
-    const traerUnidad = () => {};
-    const traerCentros = () => {};
-    const traerDependencia = () => {};
-    const traerProfesion = () => {};
-    const traerGenero = () => {};
-    const traerNAcionalidad = () => {};
     return {
       // typeSearch: ref("one"),
       date: ref("2019/02/01"),
       extendSearchToggle: ref(false),
       dateSearchToggle: ref(false),
       rangeDateSearchToggle: ref(false),
-      depto: ref(null),
-      unidad: ref(null),
-      centro: ref(null),
-      dependencia: ref(null),
-      profesion: ref(null),
-      genero: ref(null),
-      nacionalidad: ref(null),
+
       filter: ref(""),
 
       columns,
       rows,
       url,
-
-      options1: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
-      options2: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
-      options3: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
-      options4: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
-      options5: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      // Genero, modalidad, rol trabajo
+      // options1: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      // options2: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      // options3: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      // options4: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      options5: ["SEMI-P", "P"],
       options6: ["M", "F"],
-      options7: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      options7: ["L-M-M", "L-M-M-J", "L-M-M-J-V"],
 
       Buscar,
       dateIni,
       dateFin,
       Empleados,
       Empleado,
+      depto,
+      unidad,
+      centro,
+      dependencia,
+      dias_laborales,
+      genero,
+      modalidad,
       buscarEmpleado,
       traerEmpleados,
       fechas,
       empleadosFiltros,
-      traerUnidad,
-      traerCentros,
-      traerDependencia,
-      traerProfesion,
-      traerGenero,
-      traerNAcionalidad,
     };
   },
 };

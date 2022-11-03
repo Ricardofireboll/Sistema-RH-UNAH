@@ -29,9 +29,9 @@ function empleadosFechas(fecha1, fecha2) {
     });
 }
 /**********************************************************************/
-function empleadosConsulta() {
+function empleadosConsulta(genero, modalidad, rol_trabajo) {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM EMPLEADOS WHERE id_empleado=111`, (error, result) =>{
+        conexion.query(`SELECT * FROM EMPLEADOS WHERE genero='${genero}' AND modalidad='${modalidad}' AND rol_trabajo='${rol_trabajo}'`, (error, result) =>{
             
             return error ? reject(error) : resolve(result);
         });

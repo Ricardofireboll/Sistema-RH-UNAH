@@ -16,9 +16,9 @@ function empleadosfechas(fecha1, fecha2) {
     return dataBase.empleadosFechas(fecha1, fecha2);
 }
 /**********************************************************************/
-function empleadosConsulta() {
+function empleadosConsulta(genero, modalidad, rol_trabajo) {
     
-    return dataBase.empleadosConsulta();
+    return dataBase.empleadosConsulta(genero, modalidad, rol_trabajo);
 }
 /**********************************************************************/
 
