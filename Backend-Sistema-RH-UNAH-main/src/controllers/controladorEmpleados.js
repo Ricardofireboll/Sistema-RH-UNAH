@@ -6,6 +6,10 @@ const TABLA = 'EMPLEADOS'
 function empleados() {
     return dataBase.empleados();
 }
+function empleadosfechas(fecha1, fecha2) {
+    
+    return dataBase.empleadosFechas(fecha1, fecha2);
+}
 
 function empleadosPAA() {
     return dataBase.empleadosPAA(TABLA);
@@ -35,6 +39,7 @@ function eliminar(id) {
 module.exports ={
     eliminar,
     empleados,
+    empleadosfechas,
     empleadosPAA,
     insertarEmpleadoPAA,
     insertarEmpleado,

@@ -3,7 +3,7 @@ const config = require('../config');
 const { error } = require('../helpers/respuestas');
 
 const dbConfig = {
-    server: config.mysql.server,
+    host: config.mysql.server,
     database:config.mysql.dababase,
     user: config.mysql.user,
     password: config.mysql.password

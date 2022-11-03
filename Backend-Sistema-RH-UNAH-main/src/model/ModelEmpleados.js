@@ -20,15 +20,6 @@ function empleados() {
     });
 }
 
-function empleadosFechas(fecha1, fecha2) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM EMPLEADOS WHERE fecha_ingreso BETWEEN '${fecha1}' AND '${fecha2}'`, (error, result) =>{
-            result.fecha_ingreso ="0"
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-
 function unEmpleado(TABLA,id) {
     return new Promise((resolve, reject) =>{
         conexion.query(`SELECT * FROM ${TABLA} WHERE ID_Empleado=${id}`, (error, result) =>{
@@ -74,7 +65,6 @@ function eliminarEmpleado(TABLA, id) {
 module.exports ={
     empleadosPAA,
     empleados,
-    empleadosFechas,
     unEmpleado,
     insertarEmpleado,
     insertarEmpleadoPAA,
