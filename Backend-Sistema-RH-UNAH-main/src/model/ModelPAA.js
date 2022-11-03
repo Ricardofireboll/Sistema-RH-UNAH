@@ -28,6 +28,16 @@ function empleadosFechas(fecha1, fecha2) {
         });
     });
 }
+/**********************************************************************/
+function empleadosConsulta() {
+    return new Promise((resolve, reject) =>{
+        conexion.query(`SELECT * FROM EMPLEADOS WHERE id_empleado=111`, (error, result) =>{
+            
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+/**********************************************************************/
 
 function unEmpleado(TABLA,id) {
     return new Promise((resolve, reject) =>{
@@ -75,6 +85,9 @@ module.exports ={
     empleadosPAA,
     empleados,
     empleadosFechas,
+    /**********************************************************************/
+    empleadosConsulta,
+    /**********************************************************************/
     unEmpleado,
     insertarEmpleado,
     insertarEmpleadoPAA,

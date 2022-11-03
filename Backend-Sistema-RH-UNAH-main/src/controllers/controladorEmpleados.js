@@ -11,6 +11,18 @@ function empleadosfechas(fecha1, fecha2) {
     return dataBase.empleadosFechas(fecha1, fecha2);
 }
 
+function empleadosfechas(fecha1, fecha2) {
+    
+    return dataBase.empleadosFechas(fecha1, fecha2);
+}
+/**********************************************************************/
+function empleadosConsulta() {
+    
+    return dataBase.empleadosConsulta();
+}
+/**********************************************************************/
+
+
 function empleadosPAA() {
     return dataBase.empleadosPAA(TABLA);
 }
@@ -40,6 +52,9 @@ module.exports ={
     eliminar,
     empleados,
     empleadosfechas,
+    /**********************************************************************/
+    empleadosConsulta,
+    /**********************************************************************/
     empleadosPAA,
     insertarEmpleadoPAA,
     insertarEmpleado,

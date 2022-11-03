@@ -23,7 +23,7 @@
     <q-input
       v-model="Buscar"
       filled
-      label="Buscar por codigo e empleado"
+      label="Buscar por codigo de empleado"
       type="search"
       style="width: 25rem"
       :rules="[(val) => (val && val.length > 0) || 'Ingresar correo']"
@@ -360,7 +360,7 @@ export default {
   setup() {
     const Buscar = ref("");
     const dateIni = ref("2015/02/01");
-    const dateFin = ref("2022/02/01");
+    const dateFin = ref("2022/12/01");
 
     var Empleados = ref([]);
     var Empleado = ref([]);
@@ -428,7 +428,26 @@ export default {
         console.log(error);
       }
     };
-    const traerDepartamentos = () => {};
+    const empleadosFiltros = async () => {
+      try {
+        await axios({
+          url: `http://localhost:4000/RR-HH/empleados/fechas?fecha1=${dateIni.value}&fecha2=${dateFin.value}`,
+          method: "get",
+          responseType: "json",
+        })
+          .then((res) => {
+            Empleado.value = res.data.body;
+            console.log(Empleado.value);
+            console.log(res.data.body);
+            rows.value = Empleado.value;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const traerUnidad = () => {};
     const traerCentros = () => {};
     const traerDependencia = () => {};
@@ -470,7 +489,7 @@ export default {
       buscarEmpleado,
       traerEmpleados,
       fechas,
-      traerDepartamentos,
+      empleadosFiltros,
       traerUnidad,
       traerCentros,
       traerDependencia,

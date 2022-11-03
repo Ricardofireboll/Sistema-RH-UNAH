@@ -11,6 +11,10 @@ const routerEmpleados = express.Router();
 routerEmpleados.get('/', /*seguridad(),*/ empleados);
 //traer empleados por fechas
 routerEmpleados.get('/fechas', empleadosfecha);
+/**********************************************************************/
+//traer empleados por consultas
+routerEmpleados.get('/consulta', Consulta);
+/**********************************************************************/
 //Obtener un empleado
 routerEmpleados.get('/:id', unEmpleado);
 //Eliminar un empleado
@@ -39,6 +43,16 @@ async function empleadosfecha(req, res, next){
         next(err)
     }
 };
+/**********************************************************************/
+async function Consulta(req, res, next){
+    try {
+        const items = await controlador.empleadosConsulta();
+        respuesta.success(req, res, items, 200);
+    } catch (err) {
+        next(err)
+    }
+};
+/**********************************************************************/
 
 async function unEmpleado(req, res, next){
     try {
