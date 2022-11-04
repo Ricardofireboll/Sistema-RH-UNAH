@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f47ba3b-66ad-4c94-a7c1-720c6b6ed8b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Sistema-RH-UNAH.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/GestorEmpleado.vue" afterDir="false" />
+    <list default="true" id="08239d17-8fe8-4383-922f-a98e3c3bf615" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/MenuPrincipal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/MenuPrincipal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend-Sistema-RH-UNAH-main/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend-Sistema-RH-UNAH-main/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/GestorEmpleado.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/GestorEmpleado.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Vue Single File Component" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,34 +17,34 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2GepmbAfGwjoxTOqN9qDqQ4UkrF" />
+  <component name="ProjectId" id="2H4LsRdgzVugiS2dQqegPkcNTEN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/amata/Documents/GitHub/Sistema-RH-UNAH&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/amata/Documents/GitHub/Sistema-RH-UNAH",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.2.3\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9f47ba3b-66ad-4c94-a7c1-720c6b6ed8b0" name="Changes" comment="" />
-      <created>1666759064270</created>
+      <changelist id="08239d17-8fe8-4383-922f-a98e3c3bf615" name="Changes" comment="" />
+      <created>1667539617912</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1666759064270</updated>
-      <workItem from="1666759067196" duration="1006000" />
-      <workItem from="1666936748376" duration="1502000" />
-      <workItem from="1667013920657" duration="6551000" />
+      <updated>1667539617912</updated>
+      <workItem from="1667539622118" duration="136000" />
+      <workItem from="1667539760375" duration="10114000" />
     </task>
     <servers />
   </component>
@@ -68,7 +56,38 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="e0e9eff7-7f0d-4a8f-a0b2-5b4f99528d0b">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/amata/Documents/GitHub/Sistema-RH-UNAH/Frontend-Sistema-RH-UNAH-main/src/pages" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
