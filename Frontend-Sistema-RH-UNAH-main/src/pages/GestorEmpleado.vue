@@ -232,7 +232,7 @@
           <q-header class="bg-black">
             <q-toolbar>
               <q-toolbar-title class="text-center"
-              >Registrar y actualizar un empleado</q-toolbar-title
+              >Registrar un empleado</q-toolbar-title
               >
             </q-toolbar>
           </q-header>

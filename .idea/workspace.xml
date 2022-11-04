@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="08239d17-8fe8-4383-922f-a98e3c3bf615" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/GestorEmpleado.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend-Sistema-RH-UNAH-main/src/pages/GestorEmpleado.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +43,7 @@
       <updated>1667539617912</updated>
       <workItem from="1667539622118" duration="136000" />
       <workItem from="1667539760375" duration="10650000" />
-      <workItem from="1667592461040" duration="3082000" />
+      <workItem from="1667592461040" duration="3823000" />
     </task>
     <servers />
   </component>
