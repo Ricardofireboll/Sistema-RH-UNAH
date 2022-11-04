@@ -5,8 +5,14 @@ const respuesta = require('../helpers/respuestas');
 
 function empleadosPAA() {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM PAA  INNER JOIN EMPLEADOS 
-        ON PAA.id_empleado = EMPLEADOS.id_empleado`, (error, result) =>{
+        conexion.query(`SELECT * FROM empleados_paa INNER JOIN paa 
+        on paa.id_paa=empleados_paa.id_paa
+        INNER JOIN rol_empleado_paa ON
+        paa.id_roll_empleado_paa=rol_empleado_paa.id_roll_empleado_paa
+        INNER JOIN tipo_paa ON
+        paa.id_tipo_paa=tipo_paa.id_tipo_paa
+        INNER JOIN empleados ON
+        empleados.id_empleado=empleados_paa.id_empleado;`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
@@ -14,7 +20,7 @@ function empleadosPAA() {
 
 function empleados() {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM EMPLEADOS`, (error, result) =>{
+        conexion.query(`SELECT * FROM empleados`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });

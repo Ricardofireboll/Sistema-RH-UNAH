@@ -87,25 +87,55 @@
           <q-header class="bg-black">
             <q-toolbar>
               <q-toolbar-title class="text-center"
-                >Registrar un nuevo empleado</q-toolbar-title
+                >Registrar y actualizar un empleado</q-toolbar-title
               >
             </q-toolbar>
           </q-header>
           <q-page-container>
             <div class="q-pa-md">
               <div class="q-gutter-md row items-start">
-                <q-input filled type="number" hint="Id del empleado" />
-                <q-input filled type="text" hint="Primer nombre" />
-                <q-input filled type="text" hint="Segundo nombre" />
-                <q-input filled type="text" hint="Primer apellido" />
-                <q-input filled type="text" hint="Segundo apellido" />
-                <q-input filled type="email" hint="Correo institucional" />
+                <q-input
+                  filled
+                  v-model="id_empleado"
+                  type="number"
+                  hint="Id del empleado"
+                />
+                <q-input
+                  filled
+                  v-model="nombre1"
+                  type="text"
+                  hint="Primer nombre"
+                />
+                <q-input
+                  filled
+                  v-model="npombre2"
+                  type="text"
+                  hint="Segundo nombre"
+                />
+                <q-input
+                  filled
+                  v-model="apellido1"
+                  type="text"
+                  hint="Primer apellido"
+                />
+                <q-input
+                  filled
+                  v-model="apellido2"
+                  type="text"
+                  hint="Segundo apellido"
+                />
+                <q-input
+                  filled
+                  v-model="correo"
+                  type="email"
+                  hint="Correo institucional"
+                />
                 <q-select
                   hint="Genero"
                   transition-show="flip-up"
                   transition-hide="flip-down"
                   filled
-                  v-model="model"
+                  v-model="genero"
                   :options="options"
                   style="width: 250px"
                 />
@@ -154,6 +184,12 @@
                 />
                 <q-input filled type="number" hint="Sueldo" />
               </div>
+              <q-btn
+                color="primary"
+                class="q-mt-lg"
+                @click="guardarUsuario"
+                label="Guardar"
+              />
             </div>
 
             <q-page-scroller position="bottom">
@@ -167,6 +203,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import { ref, computed } from "vue";
 const columns = [
   {
@@ -208,6 +246,14 @@ const columns = [
 const rows = [];
 export default {
   setup() {
+    const newUser = ref("");
+    const id_empleado = ref("");
+    const nombre1 = ref("");
+    const npombre2 = ref("");
+    const apellido1 = ref("");
+    const apellido2 = ref("");
+    const genero = ref("");
+    const correo = ref("");
     const pagination = ref({
       sortBy: "id",
       descending: false,
@@ -215,6 +261,73 @@ export default {
       rowsPerPage: 3,
       // rowsNumber: xx if getting data from a server
     });
+
+    const guardarUsuario = async () => {
+      newUser.value = {
+        id_empleado: id_empleado,
+        primer_nombre: nombre1,
+        segundo_nombre: npombre2,
+        primer_apeliido: apellido1,
+        segundo_apellido: apellido2,
+        correo_institucional: correo,
+        genero: genero,
+        dni: "0807-1960-3697",
+        fecha_ingreso: "2022-09-01",
+        fecha_nacimiento: "2000-02-10",
+        celular: 4344142992,
+        Correo_personal: "dlestrange2l@themeforest.net",
+        telefono: 9102827224,
+        plan2: 289,
+        entrada: null,
+        salida: null,
+        criterio_x: null,
+        anexo_1: null,
+        anexo_1b: null,
+        folio: "2",
+        a14: null,
+        modalidad: "SEMI-P",
+        rol_trabajo: "L-M-M-J",
+        anexo_15: "Syntax error in formula '/(0|X).gen'",
+        d_entrada: "10:39 AM",
+        d_salida: "12:58 PM",
+        estado_civil: "DIVORCIADO",
+        sueldo: "$18675.11",
+        Id_horario: "1",
+        IdCentro: "4",
+        IdFacultad: "4",
+        IdPlanilla: "5",
+        IdUnidad: "2",
+        IdDependencia: "3",
+        Id_reloj: "1",
+        id_categoria: 1,
+        id_jornada: 1,
+        id_profesion: 4,
+        id_puesto: 3,
+        id_estatus: 9,
+        id_nacionalidad: 4,
+        id_otro_empleo: 1,
+        id_obervacion: 2,
+      };
+      console.log(newUser.value);
+      try {
+        await axios({
+          url: "http://localhost:4000/RR-HH/PAA/Empleado",
+          method: "post",
+          responseType: "json",
+          data: newUser.value,
+        })
+          .then((res) => {
+            console.log(res.data);
+            $q.notify("Usuario Guardado");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     return {
       slide: ref("style"),
       dialog: ref(false),
@@ -224,7 +337,7 @@ export default {
       fullWidth: ref(false),
       search: ref(""),
       model: ref(null),
-      options: ["Hombre", "Mujer"],
+      options: ["M", "H"],
       model2: ref(null),
       option: ["Presencial", "Semipresencial", "Virtual"],
       model3: ref(null),
@@ -233,6 +346,15 @@ export default {
       option2: ["Soltero", "Casado", "Viudo"],
       columns,
       rows,
+      newUser,
+      guardarUsuario,
+      id_empleado,
+      nombre1,
+      npombre2,
+      apellido1,
+      apellido2,
+      genero,
+      correo,
       onSubmit() {
         //Que haga lo que tenga que hacer
         console.log("holaa");
@@ -244,6 +366,3 @@ export default {
   },
 };
 </script>
-
-import { ref } from 'vue' export default { setup () { return { dialog:
-ref(false), drawerLeft: ref(false), drawerRight: ref(true) } } }

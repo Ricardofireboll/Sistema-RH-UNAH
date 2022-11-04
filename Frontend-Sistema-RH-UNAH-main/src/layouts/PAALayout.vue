@@ -95,7 +95,7 @@
               <q-icon name="email" />
             </q-item-section>
 
-            <q-item-section> PAA1</q-item-section>
+            <q-item-section> PAA</q-item-section>
           </q-item>
           <q-item
             clickable
