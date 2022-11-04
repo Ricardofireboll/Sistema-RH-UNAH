@@ -34,9 +34,8 @@
     />
   </q-form>
 
-  <div class="q-pa-xl">
+  <div class="q-pa">
     <!--Info del perfil-->
-    <q-carousel-slide name="style" class="column no-wrap">
       <div class="row">
         <div class="q-ma-md float-left">
           <img
@@ -148,7 +147,7 @@
 
           <div class="q-pa-md">
             <div class="q-gutter-y-md column" style="max-width: 300px">
-              <q-input clearable filled color="purple-12" v-model="Anexo1b" label="Anexo 1B" />
+              <q-input clearable filled color="purple-12" v-model="Anexo1B" label="Anexo 1B" />
             </div>
           </div>
 
@@ -166,9 +165,8 @@
           </div>
         </div>
 
+
         <div class="q-mx-md q-mt-lg text-left d-flex">
-
-
             <div class="q-pa-md">
               <div class="q-gutter-y-md column" style="max-width: 300px">
                 <q-input clearable filled color="purple-12" v-model="A14" label="A14" />
@@ -216,11 +214,9 @@
             </div>
           </div>
         </div>
-
-
-
       </div>
-    </q-carousel-slide>
+
+
   </div>
 
   <div class="float-right q-mb-xl">
@@ -485,6 +481,25 @@ export default {
       Genero: ref('H'),
       dni: ref('0801-4141-4141'),
       fechai: ref('12-12-2022'),
+      Fechan: ref('12-12-2022'),
+      Celular: ref('95959595'),
+      CorreoP: ref('hahahaha@gmail.com'),
+      Telefono: ref('22232233'),
+      Plan2: ref('85'),
+      Entrada: ref(' '),
+      Salida: ref(' '),
+      CriterioX: ref(' '),
+      Anexo1: ref(' '),
+      Anexo1B: ref(' '),
+      Folio: ref('4'),
+      A14: ref(' '),
+      Modalidad: ref('P'),
+      RolT: ref('L-M-M-J'),
+      A15: ref(' '),
+      Dentrada: ref('9:30 AM'),
+      Dsalida: ref(' 5:00 PM'),
+      EstadoC: ref('SOLTERO'),
+      Sueldo: ref('100000.00'),
       slide: ref("style"),
       dialog: ref(false),
       drawerLeft: ref(false),
