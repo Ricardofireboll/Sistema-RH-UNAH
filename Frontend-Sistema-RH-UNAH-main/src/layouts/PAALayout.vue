@@ -79,7 +79,7 @@
             exact
           >
             <q-item-section avatar>
-              <q-icon name="email" />
+              <q-icon name="person" />
             </q-item-section>
 
             <q-item-section> Perfil </q-item-section>
