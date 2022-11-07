@@ -1,79 +1,60 @@
-const {conexion} = require('../DB/mysql.js');
-const respuesta = require('../helpers/respuestas');
+const {DataBase} = require('../DB/mysql.js');
 
-
-
-function empleadosPAA() {
+function traerEmpleados() {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM empleados_paa INNER JOIN paa 
-        on paa.id_paa=empleados_paa.id_paa
-        INNER JOIN rol_empleado_paa ON
-        paa.id_roll_empleado_paa=rol_empleado_paa.id_roll_empleado_paa
-        INNER JOIN tipo_paa ON
-        paa.id_tipo_paa=tipo_paa.id_tipo_paa
-        INNER JOIN empleados ON
-        empleados.id_empleado=empleados_paa.id_empleado;`, (error, result) =>{
+        DataBase.query(`SELECT * FROM empleados`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
 }
 
-function empleados() {
+function traerEmpleado(id) {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM empleados`, (error, result) =>{
+        DataBase.query(`SELECT * FROM empleados WHERE ID_Empleado=${id}`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
 }
 
-function unEmpleado(TABLA,id) {
+function agregarEmpleado(data) {
     return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM ${TABLA} WHERE ID_Empleado=${id}`, (error, result) =>{
+        DataBase.query(`INSERT INTO empleados SET ? ON DUPLICATE KEY UPDATE ?`,[data,data], (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
 }
 
-function insertarEmpleado(TABLA, data) {
+function eliminarEmpleado(id) {
     return new Promise((resolve, reject) =>{
-        conexion.query(`INSERT INTO ${TABLA} SET ? ON DUPLICATE KEY UPDATE ?`,[data,data], (error, result) =>{
+        DataBase.query(`DELETE FROM empleados WHERE ID_Empleado=${id}`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
 }
 
-function insertarEmpleadoPAA(TABLA, data) {
+function traerEmpleadosFechas(fecha1, fecha2) {
     return new Promise((resolve, reject) =>{
-        conexion.query(`INSERT INTO PAA SET ? ON DUPLICATE KEY UPDATE ?`,[data,data], (error, result) =>{
+        DataBase.query(`SELECT * FROM empleados WHERE fecha_ingreso BETWEEN '${fecha1}' AND '${fecha2}'`, (error, result) =>{
+            
             return error ? reject(error) : resolve(result);
         });
     });
 }
 
-function insertarDescripcionPAA(TABLA, data) {
+function traerEmpleadosParemetros(genero, modalidad, rol_trabajo) {
     return new Promise((resolve, reject) =>{
-        conexion.query(`INSERT INTO DESCRIPCION SET ? ON DUPLICATE KEY UPDATE ?`,[data,data], (error, result) =>{
+        DataBase.query(`SELECT * FROM empleados WHERE genero='${genero}' AND modalidad='${modalidad}' AND rol_trabajo='${rol_trabajo}'`, (error, result) =>{
+            
             return error ? reject(error) : resolve(result);
         });
     });
 }
-
-function eliminarEmpleado(TABLA, id) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`DELETE FROM ${TABLA} WHERE ID_Empleado=${id}`, (error, result) =>{
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-
-
 
 module.exports ={
-    empleadosPAA,
-    empleados,
-    unEmpleado,
-    insertarEmpleado,
-    insertarEmpleadoPAA,
-    insertarDescripcionPAA,
+    traerEmpleados,
+    traerEmpleado,
+    agregarEmpleado,
     eliminarEmpleado,
+    traerEmpleadosFechas,
+    traerEmpleadosParemetros
 }

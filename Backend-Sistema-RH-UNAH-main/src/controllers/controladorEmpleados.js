@@ -1,63 +1,34 @@
-const dataBase = require('../model/ModelPAA');
-const respuesta = require('../helpers/respuestas');
+const dataBase = require('../model/ModelEmpleados');
 
-const TABLA = 'EMPLEADOS'
-
-function empleados() {
-    return dataBase.empleados();
-}
-function empleadosfechas(fecha1, fecha2) {
-    
-    return dataBase.empleadosFechas(fecha1, fecha2);
+function traerEmpleados() {
+    return dataBase.traerEmpleados();
 }
 
-function empleadosfechas(fecha1, fecha2) {
-    
-    return dataBase.empleadosFechas(fecha1, fecha2);
-}
-/**********************************************************************/
-function empleadosConsulta(genero, modalidad, rol_trabajo) {
-    
-    return dataBase.empleadosConsulta(genero, modalidad, rol_trabajo);
-}
-/**********************************************************************/
-
-
-function empleadosPAA() {
-    return dataBase.empleadosPAA(TABLA);
+function traerEmpleado(id) {
+    return dataBase.traerEmpleado(id);
 }
 
-function unEmpleado(id) {
-    return dataBase.unEmpleado(TABLA, id);
+async function agregarEmpleado(body) {
+    return dataBase.agregarEmpleado(body);
 }
 
-async function insertarEmpleado(body) {
-    return dataBase.insertarEmpleado(TABLA, body);
+function eliminarEmpleado(id) {
+    return dataBase.eliminarEmpleado(id);
 }
 
-async function insertarEmpleadoPAA(body) {
-    return dataBase.insertarEmpleadoPAA(TABLA, body);
+function traerEmpleadosFechas(fecha1, fecha2) {
+    return dataBase.traerEmpleadosFechas(fecha1, fecha2);
 }
 
-async function insertarDescripcionPAA(body) {
-    return dataBase.insertarDescripcionPAA(TABLA, body);
-}
-
-
-function eliminar(id) {
-    return dataBase.eliminarEmpleado(TABLA, id);
+function traerEmpleadosParemetros(genero, modalidad, rol_trabajo) {
+    return dataBase.traerEmpleadosParemetros(genero, modalidad, rol_trabajo);
 }
 
 module.exports ={
-    eliminar,
-    empleados,
-    empleadosfechas,
-    /**********************************************************************/
-    empleadosConsulta,
-    /**********************************************************************/
-    empleadosPAA,
-    insertarEmpleadoPAA,
-    insertarEmpleado,
-    insertarDescripcionPAA,
-    unEmpleado
+    traerEmpleados,
+    traerEmpleado,
+    agregarEmpleado,
+    eliminarEmpleado,
+    traerEmpleadosFechas,
+    traerEmpleadosParemetros,
 }

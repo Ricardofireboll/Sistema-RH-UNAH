@@ -7,38 +7,46 @@ const seguridad = require('../auth/seguridad');
 const routerUsuarios = express.Router();
 
 
-//obtener todos los empleados
-routerUsuarios.get('/', /*seguridad(),*/ todos);
-//Obtener un empleado
-routerUsuarios.get('/:id', uno);
-//Eliminar un empleado
-routerUsuarios.delete('/:id', eliminar);
+//obtener todos los Usuarios
+routerUsuarios.get('/', /*seguridad(),*/ traerUsuarios);
+//Obtener un Usuario
+routerUsuarios.get('/:id', unUsuarios);
+//Eliminar un Usuario 
+routerUsuarios.delete('/:id', eliminarUsuario);
+//Crear un Usuario
+routerUsuarios.post('/', agregarUsuario);
+//login
+routerUsuarios.post('/login', login);
 
-//Crear un empleado
-routerUsuarios.post('/', agregar);
 
-
-async function todos(req, res, next){
+async function traerUsuarios(req, res, next){
     try {
-        const items = await controlador.todos();
+        const items = await controlador.traerUsuarios();
         respuesta.success(req, res, items, 200);
     } catch (err) {
         next(err)
     }
 };
 
-async function uno(req, res, next){
+async function unUsuarios(req, res, next){
     try {
-        const items = await controlador.uno(req.params.id);
+        const items = await controlador.unUsuarios(req.params.id);
         respuesta.success(req, res, items, 200);
     } catch (err) {
         next(err)
     }
 };
-
-async function agregar(req, res, next){
+async function eliminarUsuario(req, res, next){
     try {
-        const items = await controlador.agregar(req.body);
+        const items = await controlador.eliminarUsuario(req.params.id);
+        respuesta.success(req, res, 'Empleado eliminado satisfactoriamente', 200);
+    } catch (err) {
+        next(err)
+    }
+};
+async function agregarUsuario(req, res, next){
+    try {
+        const items = await controlador.agregarUsuario(req.body);
         if (req.body.ID_Usuario == 0) {
             mensaje = 'Usuario guardado con exito'
         }else{
@@ -50,15 +58,24 @@ async function agregar(req, res, next){
     }
 };
 
-
-async function eliminar(req, res, next){
+async function login(req, res, next) {
     try {
-        const items = await controlador.eliminar(req.params.id);
-        respuesta.success(req, res, 'Empleado eliminado satisfactoriamente', 200);
+        const token = await controlador.login(req.body.Email, req.body.Password);
+        var data 
+        if (token) {
+            data = {
+                    datos:token,
+                    validacion:'Usuario y contraseña verificada',
+                    
+            }
+        }else{
+            data= {validacion:'Usuario y contraseña invalidos'}
+        }
+        respuesta.success(req, res, data, 200);
     } catch (err) {
-        next(err)
+        next(err);
     }
-};
+}
 
 routerUsuarios.get('/holis', (req, res) => {
     res.send('💻.');

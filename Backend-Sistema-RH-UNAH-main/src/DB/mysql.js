@@ -8,11 +8,11 @@ const dbConfig = {
     user: config.mysql.user,
     password: config.mysql.password
 }
-let conexion;
+let DataBase;
 
 function conexionMysql() {
-    conexion = mysql.createConnection(dbConfig);
-    conexion.connect((err) => {
+    DataBase = mysql.createConnection(dbConfig);
+    DataBase.connect((err) => {
         if (err) {
             console.log('[db error]', err);
             setTimeout(conexionMysql, 200);
@@ -22,7 +22,7 @@ function conexionMysql() {
         }
     });
 
-    conexion.on('error', err =>{
+    DataBase.on('error', err =>{
         console.log('[db error]', err);
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             conexionMysql();
@@ -34,51 +34,7 @@ function conexionMysql() {
 
 conexionMysql();
 
-function todos(TABLA) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM ${TABLA}`, (error, result) =>{
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-function uno(TABLA,id) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT * FROM ${TABLA} WHERE ID_Usuario=${id}`, (error, result) =>{
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-
-function agregar(TABLA, data) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`INSERT INTO ${TABLA} SET ? ON DUPLICATE KEY UPDATE ?`,[data,data], (error, result) =>{
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-
-
-function eliminar(TABLA, id) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`DELETE FROM ${TABLA} WHERE ID_Usuario=${id}`, (error, result) =>{
-            return error ? reject(error) : resolve(result);
-        });
-    });
-}
-
-function query(TABLA, consulta) {
-    return new Promise((resolve, reject) =>{
-        conexion.query(`SELECT *  FROM ${TABLA} WHERE ?`,consulta, (error, result) =>{
-            return error ? reject(error) : resolve(result[0]);
-        });
-    });
-}
 
 module.exports ={
-    todos,
-    uno,
-    agregar,
-    eliminar,
-    query,
-    conexion
+    DataBase,
 }

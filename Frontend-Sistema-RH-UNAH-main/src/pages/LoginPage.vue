@@ -116,7 +116,7 @@ export default {
       } else {
         try {
           await axios({
-            url: "http://localhost:4000/RR-HH/login",
+            url: "http://localhost:4000/RR-HH/Usuarios/login",
             method: "post",
             responseType: "json",
             data: {

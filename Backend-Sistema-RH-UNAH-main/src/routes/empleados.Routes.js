@@ -8,67 +8,42 @@ const routerEmpleados = express.Router();
 
 
 //obtener todos los empleados
-routerEmpleados.get('/', /*seguridad(),*/ empleados);
+routerEmpleados.get('/', /*seguridad(),*/ traerEmpleados);
+//Obtener un empleado
+routerEmpleados.get('/Empleado/:id', traerEmpleado);
+//Crear un empleado
+routerEmpleados.post('/new', agregarEmpleado);
+//Eliminar un empleado
+routerEmpleados.delete('/:id', eliminarEmpleado);
 //traer empleados por fechas
-routerEmpleados.get('/fechas', empleadosfecha);
+routerEmpleados.get('/fechas', traerEmpleadosFechas);
 /**********************************************************************/
 //traer empleados por consultas
-routerEmpleados.get('/consulta', Consulta);
-/**********************************************************************/
-//Obtener un empleado
-routerEmpleados.get('/:id', unEmpleado);
-//Eliminar un empleado
-routerEmpleados.delete('/:id', eliminar);
-
-//Crear un empleado
-routerEmpleados.post('/new', insertarEmplead);
-
-
-async function empleados(req, res, next){
-    try {
-        const items = await controlador.empleados();
-        respuesta.success(req, res, items, 200);
-    } catch (err) {
-        next(err)
-    }
-};
-
-async function empleadosfecha(req, res, next){
-    try {
-        console.log(req.query.fecha1);
-        console.log(req.query.fecha2);
-        const items = await controlador.empleadosfechas(req.query.fecha1,req.query.fecha2);
-        respuesta.success(req, res, items, 200);
-    } catch (err) {
-        next(err)
-    }
-};
-/**********************************************************************/
-async function Consulta(req, res, next){
-    console.log(req.query.genero);
-    console.log(req.query.modalidad);
-    console.log(req.query.rol_trabajo);
-    try {
-        const items = await controlador.empleadosConsulta(req.query.genero, req.query.modalidad, req.query.rol_trabajo);
-        respuesta.success(req, res, items, 200);
-    } catch (err) {
-        next(err)
-    }
-};
+routerEmpleados.get('/consulta', traerEmpleadosParemetros);
 /**********************************************************************/
 
-async function unEmpleado(req, res, next){
+
+async function traerEmpleados(req, res, next){
     try {
-        const items = await controlador.unEmpleado(req.params.id);
+        const items = await controlador.traerEmpleados();
         respuesta.success(req, res, items, 200);
     } catch (err) {
         next(err)
     }
 };
 
-async function insertarEmplead(req, res, next){
+async function traerEmpleado(req, res, next){
     try {
-        const items = await controlador.insertarEmpleado(req.body);
+        const items = await controlador.traerEmpleado(req.params.id);
+        respuesta.success(req, res, items, 200);
+    } catch (err) {
+        next(err)
+    }
+};
+
+async function agregarEmpleado(req, res, next){
+    try {
+        const items = await controlador.agregarEmpleado(req.body);
         if (req.body.id_empleado == 0) {
             mensaje = 'Empleado guardado con exito'
         }else{
@@ -79,17 +54,36 @@ async function insertarEmplead(req, res, next){
         next(err)
     }
 };
-
-
-async function eliminar(req, res, next){
+async function eliminarEmpleado(req, res, next){
     try {
-        const items = await controlador.eliminar(req.params.id);
+        const items = await controlador.eliminarEmpleado(req.params.id);
         respuesta.success(req, res, 'Empleado eliminado satisfactoriamente', 200);
     } catch (err) {
         next(err)
     }
 };
 
+async function traerEmpleadosFechas(req, res, next){
+    try {
+        console.log(req.query.fecha1);
+        console.log(req.query.fecha2);
+        const items = await controlador.traerEmpleadosFechas(req.query.fecha1,req.query.fecha2);
+        respuesta.success(req, res, items, 200);
+    } catch (err) {
+        next(err)
+    }
+};
 
+async function traerEmpleadosParemetros(req, res, next){
+    console.log(req.query.genero);
+    console.log(req.query.modalidad);
+    console.log(req.query.rol_trabajo);
+    try {
+        const items = await controlador.traerEmpleadosParemetros(req.query.genero, req.query.modalidad, req.query.rol_trabajo);
+        respuesta.success(req, res, items, 200);
+    } catch (err) {
+        next(err)
+    }
+};
 
 module.exports = routerEmpleados

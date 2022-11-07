@@ -390,7 +390,7 @@ export default {
     const traerEmpleados = async () => {
       try {
         await axios({
-          url: "http://localhost:4000/RR-HH/PAA/empleados",
+          url: "http://localhost:4000/RR-HH/empleados/",
           method: "get",
           responseType: "json",
         })
@@ -412,7 +412,7 @@ export default {
       console.log(Buscar.value);
       try {
         await axios({
-          url: `http://localhost:4000/RR-HH/PAA/${Buscar.value}`,
+          url: `http://localhost:4000/RR-HH/empleados/Empleado/${Buscar.value}`,
           method: "get",
           responseType: "json",
         })
