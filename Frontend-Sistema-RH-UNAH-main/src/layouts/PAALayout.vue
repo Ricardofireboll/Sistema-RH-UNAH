@@ -128,7 +128,7 @@
 
       <q-img
         class="absolute-top"
-        src="https://cdn.quasar.dev/img/material.png"
+        src="../assets/img/fondo_unah.png"
         style="height: 160px"
       >
         <div class="absolute-bottom bg-transparent">

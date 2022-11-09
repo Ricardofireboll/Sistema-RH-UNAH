@@ -29,8 +29,8 @@ app.use('/RR-HH/PAA', routerEmpleadosPAA);
 const routerEmpleados = require('./routes/empleados.Routes');
 app.use('/RR-HH/Empleados', routerEmpleados);
 // ejemplo
-const routerEjemplo = require('./routes/ejemplo.Routes');
-app.use('/ejemplo', routerEjemplo);
+//const routerEjemplo = require('./routes/ejemplo.Routes');
+//app.use('/ejemplo', routerEjemplo);
 
 app.use(error);
 

@@ -26,7 +26,7 @@
       label="Buscar por codigo de empleado"
       type="search"
       style="width: 25rem"
-      :rules="[(val) => (val && val.length > 0) || 'Ingresar correo']"
+      :rules="[(val) => (val && val.length > 0) || 'Ingrese el id']"
     >
       <template v-slot:append>
         <q-icon name="search" />

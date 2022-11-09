@@ -1,32 +1,31 @@
 <template>
 
 
-  <q-form @submit="onSubmit"
-          class="q-gutter-md row items-center justify-center q-ma-xl">
-    <div>
-      <q-btn-toggle
-        v-model="model"
-        class="my-custom-toggle"
-        no-caps
-        rounded
-        unelevated
-        toggle-color="primary"
-        color="white"
-        text-color="primary"
-        :options="[
-          {label: 'ID', value: 'one'},
-          {label: 'Nombre', value: 'two'}
-        ]"
-      />
-    </div>
+  <q-form
+    @submit.prevent="buscarEmpleado"
+    class="q-gutter-md row items-center justify-center q-ma-xl"
+  >
 
-    <q-input v-model="search" filled type="search"  style="width: 25rem">
+    <q-input
+      v-model="Buscar"
+      filled
+      label="Buscar por codigo de empleado"
+      type="search"
+      style="width: 25rem"
+      :rules="[(val) => (val && val.length > 0) || 'Ingrese el id']"
+    >
       <template v-slot:append>
         <q-icon name="search" />
       </template>
     </q-input>
 
-    <q-btn label="Buscar" type="submit" color="primary" style="height: 3.4rem" />
+    <q-btn
+      class="q-mb-md"
+      label="Buscar"
+      type="submit"
+      color="primary"
+      style="height: 3.4rem"
+    />
   </q-form>
 
   <div class="q-pa-xl">
@@ -50,16 +49,16 @@
 
         <div class="row">
           <div class="q-ma-md float-left">
-            <img  class="q-ma-sm" style="width: 10rem;height: 10rem;border-radius: 100%" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg"/>
+            <img  class="q-ma-sm" style="width: 10rem;height: 10rem;border-radius: 100%" src="https://www.shareicon.net/download/2016/07/10/119669_people_512x512.png"/>
           </div>
           <div class="q-mx-md q-mt-lg text-left d-flex">
             <strong>Nombre</strong>
             <div class="q-my-sm text-left d-flex">
-              {{ primer_n +" "+ segundo_nombre +" "+ primer_apellido +" "+ segundo_a }}
+              {{nombre_completo}}
             </div>
             <strong>Cuenta</strong>
             <div class="q-my-sm text-left d-flex">
-              {{ id_empleado}}
+              {{id_empleado}}
             </div>
           </div>
 
@@ -74,13 +73,15 @@
             </div>
           </div>
 
-          <div class="q-mx-md q-mt-lg text-left d-flex">
+          <div class=" q-mx-md q-mt-lg">
 
           </div>
+
         </div>
 
 
       </q-carousel-slide>
+
       <q-carousel-slide name="tv" class="column no-wrap inline-center">
 
         <div class="row flex-center">
@@ -214,9 +215,9 @@
               <hr style="margin-right: 4rem;margin-left: 4rem;background-color: #1D1D1D;border: none;height: 2px">
               <div class="row" style="margin-left: 4rem;margin-right: 4rem">
                 <div class="col">{{id_empleado}}</div>
-                <div class="col"> {{ primer_n +" "+ segundo_nombre +" "+ primer_apellido +" "+ segundo_a }}</div>
+                <div class="col"> {{nombre_completo}}</div>
                 <div class="col">Gerente de algo</div>
-                <div class="col">unidad de algo</div>
+                <div class="col">efectividad</div>
               </div>
               <hr style="margin-right: 4rem;margin-left: 4rem;background-color: #1D1D1D;border: none;height: 2px">
               <div style="width: 816px; height: 470px">
@@ -309,7 +310,7 @@ import axios from "axios";
 const columns = [
   {
 
-    
+
     name: 'id',
     required: true,
     label: 'ID',
@@ -318,7 +319,9 @@ const columns = [
     format: val => `${val}`,
     sortable: true
   },
-  { name: 'nombre', align: 'center', label: 'Nombre', field: 'nombre', sortable: true },
+
+
+
   { name: 'anio', label: 'Año', field: 'anio', sortable: true },
   { name: 'periodo', label: 'Periodo', field: 'periodo' },
   { name: 'edificio', label: 'Edificio', field: 'edificio' },
@@ -342,42 +345,65 @@ const rows = [
   },
   {
     id: 2,
+    anio: 2018,
+    nombre:'Mark',
+    periodo: 3,
+    edificio: 'B2',
+    aula:102,
+    funcion:'Aplicador',
+    fecha:'14/11/18',
+    horas:1
+  },
+  {
+    id: 3,
     anio: 2021,
     nombre:'Mark',
     periodo: 3,
     edificio: 'B2',
     aula:102,
     funcion:'Aplicador',
-    fecha:'15/10/15',
+    fecha:'10/10/21',
     horas:1
   }
+
 ]
 
+
 export default {
+
   setup () {
+    const Buscar = ref("");
     let nombrePDF=ref('')
     let id_empleado=ref('')
     let primer_n=ref('')
     let segundo_nombre=ref('')
     let primer_apellido=ref('')
     let segundo_a=ref('')
-    let empleado=ref([])
+    let Empleado=ref([])
+    let nombre_completo=ref('')
+    let centro=ref('')
+    let unidad=ref('')
 
-    const empleadoUnico = async () => {
+    const buscarEmpleado = async () => {
+      console.log(Buscar.value);
       try {
         await axios({
-          url: "http://localhost:4000/RR-HH/PAA/unEmpleado",
+          url: `http://localhost:4000/RR-HH/PAA/${Buscar.value}`,
           method: "get",
           responseType: "json",
         })
           .then((res) => {
-            empleado.value = res.data.body;
-            console.log(empleado.value.at(0).id_empleado);
-            id_empleado.value=empleado.value.at(0).id_empleado
-            primer_n.value=empleado.value.at(0).primer_nombre
-            segundo_nombre.value=empleado.value.at(0).segundo_nombre
-            primer_apellido.value=empleado.value.at(0).primer_apeliido
-            segundo_a.value=empleado.value.at(0).segundo_apellido
+            Empleado.value = res.data.body;
+            console.log(Empleado.value);
+            console.log(res.data.body);
+            rows.value = Empleado.value;
+            id_empleado.value=Empleado.value.at(0).id_empleado
+            nombre_completo.value= Empleado.value.at(0).primer_nombre+" "+
+            Empleado.value.at(0).segundo_nombre+" "+
+            Empleado.value.at(0).primer_apeliido+" "+
+            Empleado.value.at(0).segundo_apellido
+            centro.value='Ciudad universitaria'
+            unidad.value='efectividad'
           })
           .catch((error) => {
             console.log(error);
@@ -387,7 +413,6 @@ export default {
       }
     };
 
-    empleadoUnico();
 
 
 
@@ -412,8 +437,8 @@ export default {
       nombrePDF,
       model: ref('one'),
       slide: ref('style'),
-      centro:'Ciudad Universitaria',
-      unidad:'Gestion y desarrollo',
+      centro,
+      unidad,
       pagination,
       fullWidth: ref(false),
       reporte: ref(false),
@@ -423,12 +448,15 @@ export default {
       separator: ref('none'),
       edicion:ref(false),
 
-      empleado,
+      Empleado,
       id_empleado,
       primer_n,
       segundo_nombre,
       primer_apellido,
       segundo_a,
+      Buscar,
+      buscarEmpleado,
+      nombre_completo,
 
 
 

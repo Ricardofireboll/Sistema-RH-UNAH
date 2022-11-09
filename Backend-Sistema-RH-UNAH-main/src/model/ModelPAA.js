@@ -3,7 +3,7 @@ const respuesta = require('../helpers/respuestas');
 
 
 
-function empleadosPAA() {
+function empleadosPAA(id) {
     return new Promise((resolve, reject) =>{
         conexion.query(`SELECT * FROM empleados_paa INNER JOIN paa 
         on paa.id_paa=empleados_paa.id_paa
@@ -12,7 +12,7 @@ function empleadosPAA() {
         INNER JOIN tipo_paa ON
         paa.id_tipo_paa=tipo_paa.id_tipo_paa
         INNER JOIN empleados ON
-        empleados.id_empleado=empleados_paa.id_empleado;`, (error, result) =>{
+        empleados.id_empleado=empleados_paa.id_empleado WHERE empleados.id_empleado= ${id};`, (error, result) =>{
             return error ? reject(error) : resolve(result);
         });
     });
