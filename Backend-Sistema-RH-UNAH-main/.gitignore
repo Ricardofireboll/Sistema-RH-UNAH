@@ -1,7 +1,0 @@
-.gitignore
-.env
-node_modules
-ejemplo.Routes.js
-ModelEjemplo.js
-controladorEjemplo.js
-.vercel
