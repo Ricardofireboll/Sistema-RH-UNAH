@@ -125,7 +125,7 @@ export default {
       try {
         usuarioActual.value = sessionStorage.getItem("User");
         await axios({
-          url: `http://localhost:4000/RR-HH/usuarios/${usuarioActual.value}`,
+          url: `/RR-HH/usuarios/${usuarioActual.value}`,
           method: "get",
           responseType: "json",
         })

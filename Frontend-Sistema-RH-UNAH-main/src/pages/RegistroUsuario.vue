@@ -2,7 +2,7 @@
   <q-page padding class="column items-center text-center">
     <div id="formulario-newUser" class="shadow-10">
       <span>Registro Usuario</span>
-      <q-form @submit.prevent="guardarUsuario">
+      <q-form @submit.prevent="guardarUsuario" @reset="reset" ref="myForm">
         <div class="row items-center text-center">
           <!-- col 1 -->
           <div class="col-4">
@@ -11,6 +11,7 @@
                 <q-input
                   v-model="primerNombre"
                   text-center
+                  lazy-rules
                   label="Primer Nombre"
                   :rules="[
                     (val) =>
@@ -20,6 +21,7 @@
                 <q-input
                   class="q-mt-md"
                   v-model="primerApellido"
+                  lazy-rules
                   label="Primer Apellido"
                   :rules="[
                     (val) =>
@@ -30,6 +32,7 @@
               <div class="col-6 q-pa-lg">
                 <q-input
                   v-model="segundoNombre"
+                  lazy-rules
                   label="Segundo Nombre"
                   :rules="[
                     (val) =>
@@ -39,6 +42,7 @@
                 <q-input
                   class="q-mt-md"
                   v-model="segundoApellido"
+                  lazy-rules
                   label="Segundo Apellido"
                   :rules="[
                     (val) =>
@@ -51,6 +55,7 @@
               <div class="col-12 q-pa-md">
                 <q-input
                   v-model="fechaNacimiento"
+                  lazy-rules
                   type="date"
                   hint="Fecha de Nacimiento"
                   :rules="[
@@ -62,6 +67,7 @@
                   class="q-mt-md"
                   v-model="telefono"
                   type="tel"
+                  lazy-rules
                   label="Telefono"
                   mask="(###) #### - ####"
                   unmasked-value
@@ -81,6 +87,7 @@
                 <q-input
                   v-model="email"
                   type="email"
+                  lazy-rules
                   label="Correo electronico"
                   :rules="[
                     (val) =>
@@ -89,6 +96,7 @@
                 />
                 <q-input
                   v-model="password"
+                  lazy-rules
                   label="Password"
                   class="q-mt-lg"
                   color="purple-12"
@@ -115,6 +123,7 @@
                   transition-show="flip-up"
                   transition-hide="flip-down"
                   :options="options"
+                  lazy-rules
                   label="Departamento"
                   emit-value
                   map-options
@@ -125,6 +134,7 @@
                 <q-input
                   class="q-mt-sm"
                   v-model="direccion"
+                  lazy-rules
                   label="Dirección"
                   :rules="[
                     (val) =>
@@ -147,7 +157,7 @@
                 />
                 <q-btn
                   color="primary"
-                  @click="holas"
+                  @click="reset"
                   class="q-mt-lg q-ml-lg"
                   label="hola"
                 />
@@ -167,20 +177,22 @@ import { ref } from "vue";
 export default {
   setup() {
     const $q = useQuasar();
-    const newUser = ref("");
-    const primerNombre = ref("");
-    const segundoNombre = ref("");
-    const primerApellido = ref("");
-    const segundoApellido = ref("");
+    const myForm = ref(null);
+    const newUser = ref(null);
+    const primerNombre = ref(null);
+    const segundoNombre = ref(null);
+    const primerApellido = ref(null);
+    const segundoApellido = ref(null);
     const img = ref();
-    const telefono = ref("");
-    const fechaNacimiento = ref("");
-    const email = ref("");
+    const telefono = ref(null);
+    const fechaNacimiento = ref(null);
+    const email = ref(null);
     const isPwd = ref(true);
-    const password = ref("");
-    const direccion = ref("");
+    const password = ref(null);
+    const direccion = ref(null);
     const departamento = ref(null);
-    const hola = ref("");
+    const hola = ref(null);
+    const prueba = ref(null);
     const options = [
       {
         label: "Administrador",
@@ -218,7 +230,7 @@ export default {
       console.log(newUser.value);
       try {
         await axios({
-          url: "http://localhost:4000/RR-HH/usuarios",
+          url: "/RR-HH/empleados/new",
           method: "post",
           responseType: "json",
           data: newUser.value,
@@ -233,11 +245,27 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      myForm.value.resetValidation();
+      reset();
+    };
+    const reset = () => {
+      primerNombre.value = null;
+      segundoNombre.value = null;
+      primerApellido.value = null;
+      segundoApellido.value = null;
+      img.value = null;
+      telefono.value = null;
+      fechaNacimiento.value = null;
+      email.value = null;
+      password.value = null;
+      direccion.value = null;
+      departamento.value = null;
     };
     const holas = () => {
       console.log(img.value);
     };
     return {
+      myForm,
       newUser,
       primerNombre,
       segundoNombre,
@@ -253,8 +281,11 @@ export default {
       departamento,
       options,
       guardarUsuario,
+      reset,
+
       hola,
       holas,
+      prueba,
     };
   },
 };

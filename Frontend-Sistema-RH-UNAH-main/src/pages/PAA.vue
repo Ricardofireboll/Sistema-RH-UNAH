@@ -1226,7 +1226,7 @@ export default {
     const empleados = async () => {
       try {
         await axios({
-          url: "http://localhost:4000/RR-HH/PAA/empleados",
+          url: "/RR-HH/PAA/empleados",
           method: "get",
           responseType: "json",
         })

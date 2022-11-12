@@ -26,7 +26,7 @@
       label="Buscar por codigo de empleado"
       type="search"
       style="width: 25rem"
-      :rules="[(val) => (val && val.length > 0) || 'Ingresar correo']"
+      :rules="[(val) => (val && val.length > 0) || 'Ingrese el id']"
     >
       <template v-slot:append>
         <q-icon name="search" />
@@ -390,7 +390,11 @@ export default {
     const traerEmpleados = async () => {
       try {
         await axios({
+<<<<<<< Updated upstream
           url: "http://localhost:4000/RR-HH/PAA/empleados",
+=======
+          url: "/RR-HH/empleados/",
+>>>>>>> Stashed changes
           method: "get",
           responseType: "json",
         })
@@ -412,7 +416,11 @@ export default {
       console.log(Buscar.value);
       try {
         await axios({
+<<<<<<< Updated upstream
           url: `http://localhost:4000/RR-HH/PAA/${Buscar.value}`,
+=======
+          url: `/RR-HH/empleados/Empleado/${Buscar.value}`,
+>>>>>>> Stashed changes
           method: "get",
           responseType: "json",
         })
@@ -433,7 +441,7 @@ export default {
       console.log(dateIni.value + " " + dateFin.value);
       try {
         await axios({
-          url: `http://localhost:4000/RR-HH/empleados/fechas?fecha1=${dateIni.value}&fecha2=${dateFin.value}`,
+          url: `/RR-HH/empleados/fechas?fecha1=${dateIni.value}&fecha2=${dateFin.value}`,
           method: "get",
           responseType: "json",
         })
@@ -453,7 +461,7 @@ export default {
     const empleadosFiltros = async () => {
       try {
         await axios({
-          url: `http://localhost:4000/RR-HH/Empleados/consulta?genero=${genero.value}&modalidad=${modalidad.value}&rol_trabajo=${dias_laborales.value}`,
+          url: `/RR-HH/Empleados/consulta?genero=${genero.value}&modalidad=${modalidad.value}&rol_trabajo=${dias_laborales.value}`,
           method: "get",
           responseType: "json",
         })

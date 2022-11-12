@@ -6,6 +6,7 @@ const seguridad = require('../auth/seguridad');
 
 const routerUsuarios = express.Router();
 
+<<<<<<< Updated upstream
 
 //obtener todos los empleados
 routerUsuarios.get('/', /*seguridad(),*/ todos);
@@ -13,6 +14,21 @@ routerUsuarios.get('/', /*seguridad(),*/ todos);
 routerUsuarios.get('/:id', uno);
 //Eliminar un empleado
 routerUsuarios.delete('/:id', eliminar);
+=======
+routerUsuarios.get('/holis', (req, res) => {
+    res.send('💻.');
+});
+//obtener todos los Usuarios
+routerUsuarios.get('/', /*seguridad(),*/ traerUsuarios);
+//Obtener un Usuario
+routerUsuarios.get('/:id', unUsuarios);
+//Eliminar un Usuario 
+routerUsuarios.delete('/:id', eliminarUsuario);
+//Crear un Usuario
+routerUsuarios.post('/', agregarUsuario);
+//login
+routerUsuarios.post('/login', login);
+>>>>>>> Stashed changes
 
 //Crear un empleado
 routerUsuarios.post('/', agregar);
@@ -60,8 +76,5 @@ async function eliminar(req, res, next){
     }
 };
 
-routerUsuarios.get('/holis', (req, res) => {
-    res.send('💻.');
-});
 
 module.exports = routerUsuarios

@@ -1,6 +1,13 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
+
+axios.defaults.baseURL = "https://backend-sistema-rh-unah-main.vercel.app"
+
+// axios.defaults.baseURL = "http://localhost:4000"
+
+
+
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
 // If any client changes this (global) instance, it might be a

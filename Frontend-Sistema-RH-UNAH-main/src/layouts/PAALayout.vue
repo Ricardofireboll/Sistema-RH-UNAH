@@ -128,7 +128,7 @@
 
       <q-img
         class="absolute-top"
-        src="https://cdn.quasar.dev/img/material.png"
+        src="../assets/img/fondo_unah.png"
         style="height: 160px"
       >
         <div class="absolute-bottom bg-transparent">
@@ -164,7 +164,7 @@ export default {
       try {
         usuarioActual.value = sessionStorage.getItem("User");
         await axios({
-          url: `http://localhost:4000/RR-HH/usuarios/${usuarioActual.value}`,
+          url: `/RR-HH/usuarios/${usuarioActual.value}`,
           method: "get",
           responseType: "json",
         })
