@@ -390,11 +390,7 @@ export default {
     const traerEmpleados = async () => {
       try {
         await axios({
-<<<<<<< Updated upstream
-          url: "http://localhost:4000/RR-HH/PAA/empleados",
-=======
           url: "/RR-HH/empleados/",
->>>>>>> Stashed changes
           method: "get",
           responseType: "json",
         })
@@ -416,11 +412,7 @@ export default {
       console.log(Buscar.value);
       try {
         await axios({
-<<<<<<< Updated upstream
-          url: `http://localhost:4000/RR-HH/PAA/${Buscar.value}`,
-=======
           url: `/RR-HH/empleados/Empleado/${Buscar.value}`,
->>>>>>> Stashed changes
           method: "get",
           responseType: "json",
         })

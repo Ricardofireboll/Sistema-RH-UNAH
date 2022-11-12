@@ -116,11 +116,7 @@ export default {
       } else {
         try {
           await axios({
-<<<<<<< Updated upstream
-            url: "http://localhost:4000/RR-HH/login",
-=======
             url: "/RR-HH/Usuarios/login",
->>>>>>> Stashed changes
             method: "post",
             responseType: "json",
             data: {
