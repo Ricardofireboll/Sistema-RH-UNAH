@@ -42,6 +42,7 @@ async function traerEmpleado(req, res, next){
 };
 
 async function agregarEmpleado(req, res, next){
+    console.log(req.body)
     try {
         const items = await controlador.agregarEmpleado(req.body);
         if (req.body.id_empleado == 0) {

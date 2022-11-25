@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="#">
+        <a href="/Asistencia">
           <div class="card w-100">
             <img
               src="../assets/img/asistencia.png"

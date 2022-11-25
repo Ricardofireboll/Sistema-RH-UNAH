@@ -2,9 +2,9 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
 
-axios.defaults.baseURL = "https://backend-sistema-rh-unah-main.vercel.app"
+// axios.defaults.baseURL = "https://backend-sistema-rh-unah-main.vercel.app"
 
-// axios.defaults.baseURL = "http://localhost:4000"
+axios.defaults.baseURL = "http://localhost:4000"
 
 
 

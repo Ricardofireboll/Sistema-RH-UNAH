@@ -19,7 +19,8 @@ const routes = [
       { path: '/perfilUser', component: () => import('pages/PerfilUsuario.vue') },
       { path: '/PAA1', component: () => import('pages/PAA1.vue') },
       { path: '/BusquedaEmpleado', component: () => import('pages/BusquedaEmpleado.vue') },
-      { path: '/GestorEmpleado', component: () => import('pages/GestorEmpleado.vue') }
+      { path: '/GestorEmpleado', component: () => import('pages/GestorEmpleado.vue') },
+      { path: '/Asistencia', component: () => import('pages/AsistenciaEmpleados.vue') }
     ]
   },
   {
