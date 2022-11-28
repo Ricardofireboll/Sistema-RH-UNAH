@@ -5,6 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const csvtojson = require('csvtojson')
 
+
 const csvfile = "hola.csv"
 
 

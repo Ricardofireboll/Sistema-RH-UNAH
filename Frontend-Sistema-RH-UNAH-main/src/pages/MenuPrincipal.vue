@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col">
-        <a href="/BusquedaEmpleado">
+        <a @click="BusquedaEmpleado">
           <div class="card w-100">
             <img
               src="../assets/img/gestion-empleados.png"
@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="/Asistencia">
+        <a @click="BusquedaAsistencia">
           <div class="card w-100">
             <img
               src="../assets/img/asistencia.png"
@@ -49,7 +49,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="#">
+        <a @click="BusquedaMonitoreo">
           <div class="card w-100">
             <img
               src="../assets/img/monitoreo.png"
@@ -71,7 +71,7 @@
         </a>
       </div>
       <div class="col">
-        <a href="PAA1">
+        <a @click="BusquedaPAA">
           <div class="card w-100">
             <img
               src="../assets/img/paa-logo.png"
@@ -96,7 +96,35 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { useRouter } from "vue-router";
+export default {
+  setup() {
+    const router = useRouter();
+    const BusquedaEmpleado = async () => {
+      router.push("/BusquedaEmpleado");
+    };
+
+    const BusquedaAsistencia = async () => {
+      router.push("/Asistencia");
+    };
+
+    const BusquedaMonitoreo = async () => {
+      router.push("/Monitoreo");
+    };
+
+    const BusquedaPAA = async () => {
+      router.push("/PAA1");
+    };
+    return {
+      BusquedaEmpleado,
+      BusquedaAsistencia,
+      BusquedaMonitoreo,
+      BusquedaPAA,
+    };
+  },
+};
+</script>
 
 <style scoped>
 .card {

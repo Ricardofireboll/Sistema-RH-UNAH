@@ -721,7 +721,7 @@ export default {
       formData.append("csv", archivoCSV.value);
       try {
         await axios
-          .post("http://localhost:4000/RR-HH/Asistencia", formData)
+          .post("/RR-HH/Asistencia", formData)
           .then((res) => {
             console.log(res.data);
             seamless.value = true;

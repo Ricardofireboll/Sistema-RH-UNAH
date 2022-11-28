@@ -20,7 +20,8 @@ const routes = [
       { path: '/PAA1', component: () => import('pages/PAA1.vue') },
       { path: '/BusquedaEmpleado', component: () => import('pages/BusquedaEmpleado.vue') },
       { path: '/GestorEmpleado', component: () => import('pages/GestorEmpleado.vue') },
-      { path: '/Asistencia', component: () => import('pages/AsistenciaEmpleados.vue') }
+      { path: '/Asistencia', component: () => import('pages/AsistenciaEmpleados.vue') },
+      { path: '/Monitoreo', component: () => import('pages/MonitoreoDocentes.vue') },
     ]
   },
   {

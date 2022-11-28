@@ -1,19 +1,27 @@
 <template>
   <q-layout view="hHh lpR fFf" v-for="(user, i) in usuario" :key="i">
-    <q-header elevated class="bg-primary text-white" style="height: 50px">
+    <q-header
+      elevated
+      class="text-white wave wave1"
+      style="height: 50px; background-color: #002e94"
+    >
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>Departamento de Efectividad</q-toolbar-title>
+        <q-toolbar-title>RH-UNAH</q-toolbar-title>
         <q-toolbar-title id="holis"
-          ><span class="q-mr-sm">{{
-            user.Nombre1 +
-            " " +
-            user.Nombre2 +
-            " " +
-            user.Apellido1 +
-            " " +
-            user.Apellido2
-          }}</span>
+          ><span
+            style="font-family: 'Leelawadee UI'; font-size: 1rem"
+            class="q-mr-sm"
+            >{{
+              user.Nombre1 +
+              " " +
+              user.Nombre2 +
+              " " +
+              user.Apellido1 +
+              " " +
+              user.Apellido2
+            }}</span
+          >
           <q-avatar>
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
@@ -21,19 +29,31 @@
             <q-list>
               <q-item clickable v-close-popup @click="onItemClick">
                 <q-item-section>
-                  <q-item-label>Configuraciones </q-item-label>
+                  <q-item-label
+                    ><q-icon class="q-mr-sm" name="settings" />
+                    Configuraciones</q-item-label
+                  >
                 </q-item-section>
               </q-item>
 
               <q-item clickable v-close-popup @click="onItemClick">
                 <q-item-section>
-                  <q-item-label>Ayuda</q-item-label>
+                  <q-item-label
+                    ><q-icon class="q-mr-sm" name="help" /> Ayuda</q-item-label
+                  >
                 </q-item-section>
               </q-item>
 
               <q-item clickable v-close-popup @click="closedSetion">
                 <q-item-section>
-                  <q-item-label>Cerrar sesión</q-item-label>
+                  <q-item-label
+                    >Cerrar sesión
+                    <q-icon
+                      class="q-ml-sm"
+                      size="1rem"
+                      name="logout"
+                      color="negative"
+                  /></q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -57,6 +77,12 @@
         "
       >
         <q-list padding>
+          <div
+            class="text-subtitle3 q-pa-sm text-overline q-pl-md"
+            style="font-size: 0.7rem"
+          >
+            Principal
+          </div>
           <q-item
             clickable
             v-ripple
@@ -71,7 +97,15 @@
             <q-item-section> Home </q-item-section>
           </q-item>
 
+          <q-separator />
+          <div
+            class="text-subtitle3 q-pa-sm text-overline q-pl-md"
+            style="font-size: 0.7rem"
+          >
+            Modulos
+          </div>
           <q-item
+            v-if="false"
             clickable
             v-ripple
             to="perfilUser"
@@ -92,49 +126,75 @@
             exact
           >
             <q-item-section avatar>
-              <q-icon name="email" />
+              <q-icon name="text_snippet" />
             </q-item-section>
 
             <q-item-section> PAA</q-item-section>
           </q-item>
+
+          <q-expansion-item
+            expand-separator
+            icon="people"
+            label="Empleados"
+            caption=""
+            default-closed
+          >
+            <q-item
+              clickable
+              v-ripple
+              to="BusquedaEmpleado"
+              active-class="my-menu-link"
+              exact
+              class="q-pl-xl"
+            >
+              <q-item-section avatar>
+                <q-icon name="search" />
+              </q-item-section>
+
+              <q-item-section> Busqueda </q-item-section>
+            </q-item>
+            <q-item
+              clickable
+              v-ripple
+              to="GestorEmpleado"
+              active-class="my-menu-link"
+              exact
+              class="q-pl-xl"
+            >
+              <q-item-section avatar>
+                <q-icon name="edit" />
+              </q-item-section>
+
+              <q-item-section> Gestion </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
           <q-item
             clickable
             v-ripple
-            to="BusquedaEmpleado"
+            to="Asistencia"
             active-class="my-menu-link"
             exact
           >
             <q-item-section avatar>
-              <q-icon name="email" />
+              <q-icon name="access_time" />
             </q-item-section>
 
-            <q-item-section> Busqueda Empleados </q-item-section>
+            <q-item-section> Asistencia </q-item-section>
           </q-item>
+
           <q-item
             clickable
             v-ripple
-            to="GestorEmpleado"
+            to="Monitoreo"
             active-class="my-menu-link"
             exact
           >
             <q-item-section avatar>
-              <q-icon name="email" />
+              <q-icon name="remove_red_eye" />
             </q-item-section>
 
-            <q-item-section> Gestor Empleado </q-item-section>
-          </q-item>
-          <q-item
-            clickable
-            v-ripple
-            to="Asistenci"
-            active-class="my-menu-link"
-            exact
-          >
-            <q-item-section avatar>
-              <q-icon name="email" />
-            </q-item-section>
-
-            <q-item-section> holaaa </q-item-section>
+            <q-item-section> Monitoreo </q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -151,7 +211,20 @@
           <div class="text-weight-bold">
             {{ user.Nombre1 + " " + user.Apellido1 }}
           </div>
-          <div>@{{ user.Email }}</div>
+          <div>
+            {{ user.Email }}
+            <a href="/perfilUser">
+              <q-icon
+                color="white"
+                id="setting"
+                style="float: right"
+                size="1.3rem"
+                active-class="my-menu-link"
+                to=""
+                name="settings"
+              />
+            </a>
+          </div>
         </div>
       </q-img>
     </q-drawer>
@@ -212,10 +285,34 @@ export default {
 <style lang="scss">
 .my-menu-link {
   color: white;
-  background: #0098f7;
+  background: #ffbf00;
+  border-radius: 10px;
+  margin: 1rem;
 }
 #holis {
   position: absolute;
   right: 10px;
+}
+
+#setting:hover {
+  transition: 0.3s;
+  transform: scale(1.1);
+}
+
+.wave {
+  background: url("../assets/wavey.png");
+}
+
+.wave.wave1 {
+  animation: animate 120s linear infinite;
+  color: #2f855a;
+}
+@keyframes animate {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
 }
 </style>
