@@ -36,7 +36,7 @@
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-close-popup @click="onItemClick">
+              <q-item clickable v-close-popup to="Ayuda">
                 <q-item-section>
                   <q-item-label
                     ><q-icon class="q-mr-sm" name="help" /> Ayuda</q-item-label
@@ -75,6 +75,7 @@
           margin-top: 150px;
           border-right: 1px solid #ddd;
         "
+        :thumb-style="thumbStyle"
       >
         <q-list padding>
           <div
@@ -88,6 +89,7 @@
             v-ripple
             to="user"
             active-class="my-menu-link"
+            class="menu-link"
             exact
           >
             <q-item-section avatar>
@@ -97,105 +99,190 @@
             <q-item-section> Home </q-item-section>
           </q-item>
 
+          <q-item
+            clickable
+            v-ripple
+            to="admin"
+            active-class="my-menu-link-admin"
+            class="menu-link-admin"
+            exact
+            v-if="user.ID_Departamento === 1"
+          >
+            <q-item-section avatar>
+              <q-icon name="admin_panel_settings" />
+            </q-item-section>
+
+            <q-item-section> Administrador </q-item-section>
+          </q-item>
+
           <q-separator />
           <div
             class="text-subtitle3 q-pa-sm text-overline q-pl-md"
             style="font-size: 0.7rem"
           >
-            Modulos
+            Funcionalidades
           </div>
-          <q-item
-            v-if="false"
-            clickable
-            v-ripple
-            to="perfilUser"
-            active-class="my-menu-link"
-            exact
-          >
-            <q-item-section avatar>
-              <q-icon name="person" />
-            </q-item-section>
-
-            <q-item-section> Perfil </q-item-section>
-          </q-item>
-          <q-item
-            clickable
-            v-ripple
-            to="PAA1"
-            active-class="my-menu-link"
-            exact
-          >
-            <q-item-section avatar>
-              <q-icon name="text_snippet" />
-            </q-item-section>
-
-            <q-item-section> PAA</q-item-section>
-          </q-item>
-
           <q-expansion-item
             expand-separator
-            icon="people"
-            label="Empleados"
+            icon="manage_accounts"
+            label="Funciones de administrador"
             caption=""
             default-closed
+            class="text-subtitle3 q-pa-sm"
+            v-if="user.ID_Departamento === 1"
           >
             <q-item
               clickable
               v-ripple
-              to="BusquedaEmpleado"
-              active-class="my-menu-link"
+              to="registUser"
+              active-class="my-menu-link-admin"
+              class="menu-link-admin"
               exact
-              class="q-pl-xl"
             >
               <q-item-section avatar>
-                <q-icon name="search" />
+                <q-icon name="control_point" />
               </q-item-section>
 
-              <q-item-section> Busqueda </q-item-section>
+              <q-item-section> Crear usuario </q-item-section>
             </q-item>
             <q-item
               clickable
               v-ripple
-              to="GestorEmpleado"
-              active-class="my-menu-link"
+              to="roles"
+              active-class="my-menu-link-admin"
+              class="menu-link-admin"
               exact
-              class="q-pl-xl"
             >
               <q-item-section avatar>
-                <q-icon name="edit" />
+                <q-icon name="groups" />
               </q-item-section>
 
-              <q-item-section> Gestion </q-item-section>
+              <q-item-section> Administrar roles </q-item-section>
             </q-item>
           </q-expansion-item>
 
+          <q-expansion-item
+            expand-separator
+            icon="schema"
+            label="Modulos"
+            caption=""
+            default-closed
+            class="text-subtitle3 q-pa-sm"
+          >
+            <q-item
+              v-if="false"
+              clickable
+              v-ripple
+              to="perfilUser"
+              active-class="my-menu-link"
+              class="menu-link"
+              exact
+            >
+              <q-item-section avatar>
+                <q-icon name="person" />
+              </q-item-section>
+
+              <q-item-section> Perfil </q-item-section>
+            </q-item>
+
+            <q-item
+              clickable
+              v-ripple
+              to="PAA1"
+              active-class="my-menu-link"
+              class="menu-link"
+              exact
+            >
+              <q-item-section avatar>
+                <q-icon name="text_snippet" />
+              </q-item-section>
+
+              <q-item-section> PAA</q-item-section>
+            </q-item>
+
+            <q-expansion-item
+              expand-separator
+              icon="people"
+              label="Empleados"
+              caption=""
+              default-closed
+            >
+              <q-item
+                clickable
+                v-ripple
+                to="BusquedaEmpleado"
+                active-class="my-menu-link"
+                exact
+                class="q-pl-xl menu-link"
+              >
+                <q-item-section avatar>
+                  <q-icon name="search" />
+                </q-item-section>
+
+                <q-item-section> Busqueda </q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                to="GestorEmpleado"
+                active-class="my-menu-link"
+                exact
+                class="q-pl-xl menu-link"
+              >
+                <q-item-section avatar>
+                  <q-icon name="edit" />
+                </q-item-section>
+
+                <q-item-section> Gestion </q-item-section>
+              </q-item>
+            </q-expansion-item>
+
+            <q-item
+              clickable
+              v-ripple
+              to="Asistencia"
+              active-class="my-menu-link"
+              class="menu-link"
+              exact
+            >
+              <q-item-section avatar>
+                <q-icon name="access_time" />
+              </q-item-section>
+
+              <q-item-section> Asistencia </q-item-section>
+            </q-item>
+
+            <q-item
+              clickable
+              v-ripple
+              to="Monitoreo"
+              active-class="my-menu-link"
+              class="menu-link q-mb-xl"
+              exact
+            >
+              <q-item-section avatar>
+                <q-icon name="remove_red_eye" />
+              </q-item-section>
+
+              <q-item-section> Monitoreo </q-item-section>
+            </q-item>
+          </q-expansion-item>
+          <!-- #################################################### -->
           <q-item
             clickable
             v-ripple
-            to="Asistencia"
+            to="Ayuda"
             active-class="my-menu-link"
+            class="menu-link q-mb-xl"
             exact
           >
             <q-item-section avatar>
-              <q-icon name="access_time" />
+              <q-icon name="help" />
             </q-item-section>
 
-            <q-item-section> Asistencia </q-item-section>
+            <q-item-section> Ayuda </q-item-section>
           </q-item>
-
-          <q-item
-            clickable
-            v-ripple
-            to="Monitoreo"
-            active-class="my-menu-link"
-            exact
-          >
-            <q-item-section avatar>
-              <q-icon name="remove_red_eye" />
-            </q-item-section>
-
-            <q-item-section> Monitoreo </q-item-section>
-          </q-item>
+          <!-- #################################################### -->
         </q-list>
       </q-scroll-area>
 
@@ -246,6 +333,7 @@ export default {
     const router = useRouter();
     const usuarioActual = ref("");
     var usuario = ref([]);
+
     const user = async () => {
       try {
         usuarioActual.value = sessionStorage.getItem("User");
@@ -266,6 +354,14 @@ export default {
     };
     user();
     return {
+      thumbStyle: {
+        right: "0px",
+        borderRadius: "10px",
+        backgroundColor: "#ffbf00",
+        width: "8px",
+        opacity: "0.75",
+      },
+
       usuarioActual,
       usuario,
       user,
@@ -289,6 +385,32 @@ export default {
   border-radius: 10px;
   margin: 1rem;
 }
+.menu-link:hover {
+  color: white;
+  background: #ffbf00;
+  border-radius: 10px;
+  margin: 1rem;
+  transition: 0.4s;
+  transition-delay: 0.1s;
+}
+.my-menu-link-admin {
+  color: white;
+  background: #002e94;
+  border-radius: 10px;
+  margin: 1rem;
+  transition: 0.4s;
+  transition-delay: 0.1s;
+}
+
+.menu-link-admin:hover {
+  color: white;
+  background: #002e94;
+  border-radius: 10px;
+  margin: 1rem;
+  transition: 0.4s;
+  transition-delay: 0.1s;
+}
+
 #holis {
   position: absolute;
   right: 10px;

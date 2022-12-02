@@ -148,19 +148,19 @@
           <div class="col-4 q-pa-lg">
             <div class="row">
               <div class="col-12 q-pa-lg">
-                <q-uploader v-model="img" style="max-width: 300px" />
+                <!-- <q-uploader v-model="img" style="max-width: 300px" /> -->
                 <q-btn
                   color="primary"
                   class="q-mt-lg"
                   type="submit"
                   label="Guardar"
                 />
-                <q-btn
+                <!-- <q-btn
                   color="primary"
                   @click="reset"
                   class="q-mt-lg q-ml-lg"
                   label="hola"
-                />
+                /> -->
               </div>
             </div>
           </div>

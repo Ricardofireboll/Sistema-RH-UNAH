@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col">
-        <a href="registUser">
+        <a @click="registroUser">
           <div class="card w-100">
             <img
               src="../assets/img/registro.png"
@@ -97,7 +97,18 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+export default {
+  setup() {
+    const router = useRouter();
+    const registroUser = async () => {
+      router.push("/registUser");
+    };
+    return {
+      registroUser,
+    };
+  },
+};
 </script>
 
 <style>

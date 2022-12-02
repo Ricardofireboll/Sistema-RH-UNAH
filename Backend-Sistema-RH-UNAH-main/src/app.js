@@ -30,6 +30,9 @@ app.use('/RR-HH/Empleados', routerEmpleados);
 const routerAsistencia = require('./routes/asistencia.Routes');
 app.use('/RR-HH/Asistencia', routerAsistencia);
 
+const routerMonitoreo = require('./routes/monitoreo.Routes');
+app.use('/RR-HH/Monitoreo', routerMonitoreo);
+
 app.use(error);
 
 module.exports = app;

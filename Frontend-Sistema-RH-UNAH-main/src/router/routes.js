@@ -22,6 +22,7 @@ const routes = [
       { path: '/GestorEmpleado', component: () => import('pages/GestorEmpleado.vue') },
       { path: '/Asistencia', component: () => import('pages/AsistenciaEmpleados.vue') },
       { path: '/Monitoreo', component: () => import('pages/MonitoreoDocentes.vue') },
+      { path: '/Ayuda', component: () => import('pages/HelpPage.vue') },
     ]
   },
   {
